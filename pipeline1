@@ -26,5 +26,10 @@ pipeline {
         echo 'Deploying the pull request...'
       }
     }
+	stage('Another branch') {
+      steps {
+        echo 'Deploying the pull request...'
+      }
+    }
   }
 }
