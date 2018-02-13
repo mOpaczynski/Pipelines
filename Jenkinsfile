@@ -3,12 +3,11 @@ pipeline {
   stages {
     stage('testing stage') {
       steps {
-        powershell(script: 'blablabla.ps1', encoding: 'UTF-8', returnStatus: true)
+        cleanWs(skipWhenFailed: true)
       }
     }
     stage('deploying') {
       steps {
-        powershell(script: 'getstuffDone', encoding: 'publishtest', returnStatus: true)
         cleanWs(skipWhenFailed: true)
       }
     }
