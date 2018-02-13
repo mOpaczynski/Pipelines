@@ -3,12 +3,12 @@ pipeline {
   stages {
     stage('testing stage') {
       steps {
-        cleanWs(skipWhenFailed: true)
+        cleanWs()
       }
     }
     stage('deploying') {
       steps {
-        cleanWs(skipWhenFailed: true)
+        cleanWs()
       }
     }
     stage('Success') {
