@@ -21,5 +21,10 @@ pipeline {
         echo 'Deploying a second time...'
       }
     }
+	stage('This is a pull request test') {
+      steps {
+        echo 'Deploying the pull request...'
+      }
+    }
   }
 }
