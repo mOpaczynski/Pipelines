@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building...'
-		powershell '. ..\\powershelltest.ps1'
+		powershell ". ..\\powershelltest.ps1"
       }
     }
     stage('Test') {
