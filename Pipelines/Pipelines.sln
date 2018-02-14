@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{2DCC6D30
 		..\build.sh = ..\build.sh
 		..\files\pipeline1.jenkinsfile = ..\files\pipeline1.jenkinsfile
 		..\files\pipeline2.jenkinsfile = ..\files\pipeline2.jenkinsfile
+		..\powershelltest.ps1 = ..\powershelltest.ps1
 	EndProjectSection
 EndProject
 Global
