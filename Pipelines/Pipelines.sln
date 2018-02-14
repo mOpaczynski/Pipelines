@@ -7,8 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsTests", "JenkinsTest
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{2DCC6D30-9288-4896-93C6-A8DC5C576DA3}"
 	ProjectSection(SolutionItems) = preProject
-		..\pipeline1 = ..\pipeline1
-		pipeline2.txt = pipeline2.txt
+		..\pipeline1.jenkinsfile = ..\pipeline1.jenkinsfile
+		pipeline2.jenkinsfile = pipeline2.jenkinsfile
 	EndProjectSection
 EndProject
 Global
