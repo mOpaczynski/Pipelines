@@ -16,14 +16,14 @@ pipeline {
 		powershell ".\\build.ps1 -Target Migrate-Databases"
       }
     }
-    stage('Run Tests') {
+    stage('Run tests') {
       parallel {
-        stage('API Tests'){
+        stage('API tests'){
           steps {
             echo 'Running API Tests...'
           }
         }
-        stage("UI Tests"){
+        stage("UI tests"){
           steps {
             echo 'Running UI Tests...'
           }
