@@ -13,7 +13,7 @@ Task("Restore NuGet Packages")
         });
 
 Task("Build Project")
-    .IsDependentOn("Restore Nuget Packages")
+    .IsDependentOn("Restore NuGet Packages")
     .Does(() => {
         MSBuild("./Pipelines/Pipelines.sln", settings => settings.SetConfiguration(configuration));
         });
