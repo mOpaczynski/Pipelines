@@ -18,4 +18,4 @@ Task("Build Project")
         MSBuild("./Pipelines/Pipelines.sln", settings => settings.SetConfiguration(configuration));
         });
 
-RunTarget(target);
+RunTarget("Build Project");
