@@ -1,4 +1,4 @@
-var target = Argument("target", "Default");
+var target = Argument("target", "Build Project");
 var configuration = Argument("configuration", "Release");
 
 Task("Hello")
@@ -17,8 +17,5 @@ Task("Build Project")
     .Does(() => {
         MSBuild("./Pipelines/Pipelines.sln", settings => settings.SetConfiguration(configuration));
         });
-
-Task("Default")
-    .IsDependentOn("Build Project");
 
 RunTarget(target);
