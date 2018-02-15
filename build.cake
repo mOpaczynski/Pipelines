@@ -1,14 +1,21 @@
-var target = Argument("target", "Build");
+var target = Argument("target", "Build Project");
+var configuration = Argument("configuration", "Release");
 
-Task("Build")
-    .Does(() =>
-{
-});
+Task("Hello")
+    .Does(() => {
+        Information("Hello World!");
+        });
 
-Task("Publish")
-    .IsDependentOn("Build")
-    .Does(() =>
-{
-});
+Task("Restore NuGet Packages")
+    .IsDependentOn("Hello")
+    .Does(() => {
+        NuGetRestore("./Pipelines/Pipelines.sln");
+        });
 
-RunTarget(target);
+Task("Build Project")
+    .IsDependentOn("Restore NuGet Packages")
+    .Does(() => {
+        MSBuild("./Pipelines/Pipelines.sln", settings => settings.SetConfiguration(configuration));
+        });
+
+RunTarget("Build Project");
