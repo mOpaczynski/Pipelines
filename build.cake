@@ -20,7 +20,7 @@ Task("Build Project")
 
 Task("Default")
     .Does(() => {
-        Information("Target was not selected")
+        Information("Target was not selected");
     });
 
 RunTarget(target);
