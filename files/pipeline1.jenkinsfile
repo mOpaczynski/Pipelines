@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-		powershell ".\\build.ps1 -Target 'Build Project'"
+		powershell ".\\build.ps1 -Target Build-Solution"
       }
     }
     stage('Test') {

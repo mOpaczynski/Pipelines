@@ -1,4 +1,4 @@
-var target = Argument("target", "Build Project");
+var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
 Task("Hello")
@@ -6,14 +6,14 @@ Task("Hello")
         Information("Hello World!");
     });
 
-Task("Restore NuGet Packages")
+Task("Restore-Nuget-Packages")
     .IsDependentOn("Hello")
     .Does(() => {
         NuGetRestore("./Pipelines/Pipelines.sln");
     });
 
-Task("Build Project")
-    .IsDependentOn("Restore NuGet Packages")
+Task("Build-Solution")
+    .IsDependentOn("Restore-Nuget-Packages")
     .Does(() => {
         MSBuild("./Pipelines/Pipelines.sln", settings => settings.SetConfiguration(configuration));
     });
@@ -22,3 +22,5 @@ Task("Default")
     .Does(() => {
         Information("Target was not selected");
     });
+
+RunTarget(target)
