@@ -3,9 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo 'Building...'
 		powershell ".\\build.ps1"
-		powershell ".\\powershelltest.ps1"
       }
     }
     stage('Test') {
