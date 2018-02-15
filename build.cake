@@ -22,5 +22,3 @@ Task("Default")
     .Does(() => {
         Information("Target was not selected");
     });
-
-RunTarget(target);
