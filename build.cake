@@ -18,9 +18,14 @@ Task("Build-Solution")
         MSBuild("./Pipelines/Pipelines.sln", settings => settings.SetConfiguration(configuration));
     });
 
+Task("Migrate-Databases")
+    .Does(() => {
+        Information("Migrating Databases...")
+    });
+
 Task("Default")
     .Does(() => {
-        Information("Target was not selected");
+        Information("Target task was not selected, nothing will happen.");
     });
 
 RunTarget(target)
