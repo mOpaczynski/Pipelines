@@ -20,7 +20,7 @@ Task("Build-Solution")
 
 Task("Migrate-Databases")
     .Does(() => {
-        Information("Migrating Databases...")
+        Information("Migrating Databases...");
     });
 
 Task("Default")
