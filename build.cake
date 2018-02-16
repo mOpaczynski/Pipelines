@@ -43,6 +43,8 @@ Task("Migrate-Databases")
         runMigrator.BeginOutputReadLine();
         runMigrator.BeginErrorReadLine();
         runMigrator.WaitForExit();
+
+        return runMigrator.ExitCode;
     });
 
 Task("Default")
