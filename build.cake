@@ -1,7 +1,8 @@
-#addin "Cake.EntityFramework"
-
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+
+var solutionFilePath = GetFile("./Pipelines/Pipelines.sln");
+var migrateExecFile = GetFile("./Pipelines/packages/EntityFramework*/tools/migrate.exe");
 
 Task("Hello")
     .Does(() => {
@@ -11,18 +12,22 @@ Task("Hello")
 Task("Restore-Nuget-Packages")
     .IsDependentOn("Hello")
     .Does(() => {
-        NuGetRestore("./Pipelines/Pipelines.sln");
+        NuGetRestore(solutionFilePath);
     });
 
 Task("Build-Solution")
     .IsDependentOn("Restore-Nuget-Packages")
     .Does(() => {
-        MSBuild("./Pipelines/Pipelines.sln", settings => settings.SetConfiguration(configuration));
+        MSBuild(solutionFilePath, settings => settings.SetConfiguration(configuration));
     });
 
 Task("Migrate-Databases")
     .Does(() => {
         Information("Migrating Databases...");
+        using(var migrator = CreateEfMigrator()){
+            migrator.MigrateToLatest();
+            migrator.Commit();
+        }
     });
 
 Task("Default")
