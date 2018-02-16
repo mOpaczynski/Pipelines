@@ -46,7 +46,7 @@ Task("Migrate-Databases")
 
         if (runMigrator.ExitCode != 0) 
         {
-            throw new Exception($"Process returned exit code {runMigrator.ExitCode}.");
+            throw new Exception($"Something went wrong with this task. Migrate process returned exit code {runMigrator.ExitCode}.");
         }
     });
 
