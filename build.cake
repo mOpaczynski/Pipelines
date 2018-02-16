@@ -26,7 +26,7 @@ Task("Migrate-Databases")
     .Does(() => {
         Information("Migrating Databases...");
 
-        var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First();
+        var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First().ToString();
 
         Process runMigrator = new Process();
         runMigrator.StartInfo.FileName = migrateExecFile;
