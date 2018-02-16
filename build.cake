@@ -1,8 +1,8 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
-var solutionFilePath = GetFiles("./Pipelines/Pipelines.sln").First;
-var migrateExecFile = GetFiles("./Pipelines/packages/EntityFramework*/tools/migrate.exe").First;
+var solutionFilePath = GetFiles("./Pipelines/Pipelines.sln").First();
+var migrateExecFile = GetFiles("./Pipelines/packages/EntityFramework*/tools/migrate.exe").First();
 
 Task("Hello")
     .Does(() => {
