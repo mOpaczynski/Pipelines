@@ -44,7 +44,7 @@ Task("Migrate-Databases")
         runMigrator.BeginErrorReadLine();
         runMigrator.WaitForExit();
 
-        return runMigrator.ExitCode;
+        if(runMigrator.ExitCode == 1) throw;
     });
 
 Task("Default")
