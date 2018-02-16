@@ -2,7 +2,6 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
 var solutionFilePath = GetFiles("./**/*.sln").First();
-////var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First();
 
 Task("Hello")
     .Does(() => {
@@ -24,6 +23,14 @@ Task("Build-Solution")
 Task("Migrate-Databases")
     .Does(() => {
         Information("Migrating Databases...");
+
+        var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First();
+
+        Process runMigrator = new Process();
+        runMigrator.StartInfo.Filename = migrateExecFile;
+        runMigrator.Startinfo.Arguments = "dasdasd asdasdsad"
+        runMigrator.Start();
+        runMigrator.WaitForExit();
     });
 
 Task("Default")
