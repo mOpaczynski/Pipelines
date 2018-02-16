@@ -28,6 +28,8 @@ Task("Migrate-Databases")
 
         var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First().FullPath;
 
+        Information(migrateExecFile);
+
         Process runMigrator = new Process();
         runMigrator.StartInfo.FileName = migrateExecFile;
         runMigrator.StartInfo.Arguments = "dasdasd asdasdsad";
