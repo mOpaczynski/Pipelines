@@ -13,19 +13,19 @@ pipeline {
     }
     stage('Migrate databases') {
       steps {
-		powershell ".\\build.ps1 -Target Migrate-Databases"
+		    powershell ".\\build.ps1 -Target Migrate-Databases"
       }
     }
     stage('Run tests') {
       parallel {
         stage('API tests'){
           steps {
-            echo 'Running API Tests...'
+            powershell ".\\build.ps1 -Target Build-Solution"
           }
         }
         stage("UI tests"){
           steps {
-            echo 'Running UI Tests...'
+            powershell ".\\build.ps1 -Target Build-Solution"
           }
         }
       }
