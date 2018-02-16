@@ -44,7 +44,10 @@ Task("Migrate-Databases")
         runMigrator.BeginErrorReadLine();
         runMigrator.WaitForExit();
 
-        exit runMigrator.ExitCode;
+        exit runMigrator.ExitCode != 0) 
+        {
+            throw new Exception($"Process returned exit code {runMigrator.ExitCode}.");
+        };
     });
 
 Task("Default")
