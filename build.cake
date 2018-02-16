@@ -36,12 +36,12 @@ Task("Migrate-Databases")
         runMigrator.StartInfo.UseShellExecute = false;
         runMigrator.StartInfo.RedirectStandardOutput = true;
         runMigrator.StartInfo.RedirectStandardError = true;
+        runMigrator.OutputDataReceived += (s, e) => Console.WriteLine(e.Data);
+        runMigrator.ErrorDataReceived += (s, e) => Console.WriteLine(e.Data);
 
         runMigrator.Start();
-        string output = runMigrator.StandardOutput.ReadToEnd();
-        Console.WriteLine(output);
-        string err = runMigrator.StandardError.ReadToEnd();
-        Console.WriteLine(err);
+        runMigrator.BeginOutputReadLine();
+        runMigrator.BeginErrorReadLine();
         runMigrator.WaitForExit();
     });
 
