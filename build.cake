@@ -30,7 +30,7 @@ Task("Migrate-Databases")
 
         Process runMigrator = new Process();
         runMigrator.StartInfo.FileName = migrateExecFile;
-        runMigrator.Startinfo.Arguments = "dasdasd asdasdsad"
+        runMigrator.StartInfo.Arguments = "dasdasd asdasdsad"
         runMigrator.Start();
         runMigrator.WaitForExit();
     });
