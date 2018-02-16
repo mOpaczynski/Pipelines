@@ -24,10 +24,6 @@ Task("Build-Solution")
 Task("Migrate-Databases")
     .Does(() => {
         Information("Migrating Databases...");
-        using(var migrator = CreateEfMigrator()){
-            migrator.MigrateToLatest();
-            migrator.Commit();
-        }
     });
 
 Task("Default")
