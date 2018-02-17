@@ -19,10 +19,18 @@ pipeline {
     stage('Run tests') {
       parallel {
         stage('API tests'){
-          echo 'Running api...'
+          steps{
+            echo 'Running api...'
+            echo 'Running api...'
+            echo 'Running api...'
+          }
         }
         stage("UI tests"){
-          echo 'Running ui...'
+          steps{
+            echo 'Running ui...'
+            echo 'Running ui...'
+            echo 'Running ui...'
+          }
         }
       }
     }
