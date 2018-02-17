@@ -19,14 +19,10 @@ pipeline {
     stage('Run tests') {
       parallel {
         stage('API tests'){
-          steps {
-            powershell ".\\build.ps1 -Target Build-Solution"
-          }
+          echo 'Running api...'
         }
         stage("UI tests"){
-          steps {
-            powershell ".\\build.ps1 -Target Build-Solution"
-          }
+          echo 'Running ui...'
         }
       }
     }
