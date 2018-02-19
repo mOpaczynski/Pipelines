@@ -45,7 +45,8 @@ Task("Migrate-Databases")
             Process runMigrator = new Process();
             runMigrator.StartInfo.FileName = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
             ////runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /startUpDirectory:\"{assemblyFile.GetDirectory()}\" /startUpConfigurationFile:\"{configFile}\"";
-            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /startUpDirectory:\"{assemblyFile.GetDirectory()}\" /connectionProviderName:\"{providerName}\" /connectionString:\"{connectionString}\"";
+            ////runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /startUpDirectory:\"{assemblyFile.GetDirectory()}\" /connectionProviderName:\"{providerName}\" /connectionString:\"{connectionString}\"";
+            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration}";
             runMigrator.StartInfo.UseShellExecute = false;
             runMigrator.StartInfo.RedirectStandardOutput = true;
             runMigrator.StartInfo.RedirectStandardError = true;
