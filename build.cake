@@ -32,6 +32,8 @@ Task("Migrate-Databases")
             Information(dataAccessDirectory.ToString());
             var configFile = GetFiles($"{dataAccessDirectory.FullPath}/*.config").First();
             Information(configFile);
+            var connectionString = XmlPeek(configFile, "//connectionStrings/add/connectionString");
+            var providerName = XmlPeek(configFile, "//connectionStrings/add/providerName");
             var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
             CopyFile(migrateExecFile, $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}");
             Information(assemblyFile);
@@ -42,7 +44,7 @@ Task("Migrate-Databases")
 
             Process runMigrator = new Process();
             runMigrator.StartInfo.FileName = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
-            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /verbose /startUpConfigurationFile:\"{configFile}\" /startUpDirectory:\"{assemblyFile.GetDirectory()}\"";
+            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /startUpDirectory:\"{assemblyFile.GetDirectory()}\" /startUpConfigurationFile:\"{configFile}\"";
             runMigrator.StartInfo.UseShellExecute = false;
             runMigrator.StartInfo.RedirectStandardOutput = true;
             runMigrator.StartInfo.RedirectStandardError = true;
