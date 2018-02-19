@@ -3,6 +3,7 @@ using System.Diagnostics;
 var target = Argument("target", "Default");
 var projectConfiguration = Argument("projectConfiguration", "Release");
 var migrationConfiguration = Argument("migrationConfiguration", "Configuration");
+var targetMigration = Argument("targetMigration", "");
 
 var solutionFilePath = GetFiles("./**/*.sln").First();
 
@@ -31,7 +32,7 @@ Task("Migrate-Databases")
         foreach(var dataAccessDirectory in dataAccessDirectories){
             var configFile = GetFiles($"{dataAccessDirectory.FullPath}/*.config").First();
             var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
-            var arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\"";
+            var arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\" /targetMigration:\"{}\"";
             
             CopyFile(migrateExecFile, $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}");
 
@@ -49,7 +50,7 @@ Task("Migrate-Databases")
             runMigrator.BeginErrorReadLine();
             runMigrator.WaitForExit();
 
-            if (runMigrator.ExitCode != 0) 
+            if (runMigrator.ExitCode != 0)
             {
                 throw new Exception($"Migrate.exe: Process returned an error (exit code {runMigrator.ExitCode}).");
             }
