@@ -9,13 +9,7 @@ var targetMigration = Argument("targetMigration", "");
 
 var solutionFilePath = GetFiles("./**/*.sln").First();
 
-Task("Hello")
-    .Does(() => {
-        Information("Hello World!");
-    });
-
 Task("Restore-Nuget-Packages")
-    .IsDependentOn("Hello")
     .Does(() => {
         NuGetRestore(solutionFilePath);
     });
