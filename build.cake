@@ -29,26 +29,14 @@ Task("Migrate-Databases")
         var dataAccessDirectories = GetSubDirectories("./").Where(x => x.FullPath.Contains(".DataAccess"));
 
         foreach(var dataAccessDirectory in dataAccessDirectories){
-            Information(dataAccessDirectory.ToString());
             var configFile = GetFiles($"{dataAccessDirectory.FullPath}/*.config").First();
-            Information(configFile);
-            var connectionString = XmlPeek(configFile, "//connectionStrings/add/connectionString");
-            var providerName = XmlPeek(configFile, "//connectionStrings/add/providerName");
             var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
-            CopyFile(migrateExecFile, $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}");
-            Information(assemblyFile);
-
-            Information(migrateExecFile);
-
-            Information($"{assemblyFile.GetFilename()} /startUpConfigurationFile='{configFile}' /startUpDirectory='{assemblyFile.GetDirectory()}'");
-
             var arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\"";
-            Information($"Arguments used: {arguments}");
+            
+            CopyFile(migrateExecFile, $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}");
 
             Process runMigrator = new Process();
             runMigrator.StartInfo.FileName = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
-            ////runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /startUpDirectory:\"{assemblyFile.GetDirectory()}\" /startUpConfigurationFile:\"{configFile}\"";
-            ////runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /startUpDirectory:\"{assemblyFile.GetDirectory()}\" /connectionProviderName:\"{providerName}\" /connectionString:\"{connectionString}\"";
             runMigrator.StartInfo.Arguments = arguments;
             runMigrator.StartInfo.UseShellExecute = false;
             runMigrator.StartInfo.RedirectStandardOutput = true;
