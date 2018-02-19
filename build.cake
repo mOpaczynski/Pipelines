@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 var target = Argument("target", "Default");
 var projectConfiguration = Argument("projectConfiguration", "Release");
-var migrationConfiguration = Argument('migrationConfiguration', 'Configuration');
+var migrationConfiguration = Argument("migrationConfiguration", "Configuration");
 
 var solutionFilePath = GetFiles("./**/*.sln").First();
 
@@ -31,7 +31,7 @@ Task("Migrate-Databases")
         var directories = GetSubDirectories("./");
 
         foreach(var directory in directories){
-            Information(directory.DirectoryPath);
+            Information(directory.ToString());
         }
 
         Information(migrateExecFile);
@@ -52,7 +52,7 @@ Task("Migrate-Databases")
 
         if (runMigrator.ExitCode != 0) 
         {
-            throw new Exception($"Migrations: Process returned an error (exit code {runMigrator.ExitCode}).");
+            throw new Exception($"Migrate.exe: Process returned an error (exit code {runMigrator.ExitCode}).");
         }
     });
 
