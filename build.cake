@@ -32,7 +32,7 @@ Task("Migrate-Databases")
             Information(directory.ToString());
             var configFile = GetFiles($"{directory.FullPath}/*.config").First();
             Information(configFile);
-            var assemblyFile = GetFiles($"{directory.FullPath}/**/{directory.Segments.Last()}.config").First();
+            var assemblyFile = GetFiles($"{directory.FullPath}/**/{directory.Segments.Last()}.dll").First();
             Information(assemblyFile);
         }
 
