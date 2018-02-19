@@ -32,7 +32,7 @@ Task("Migrate-Databases")
         foreach(var dataAccessDirectory in dataAccessDirectories){
             var configFile = GetFiles($"{dataAccessDirectory.FullPath}/*.config").First();
             var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
-            var arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\" /targetMigration:\"{}\"";
+            var arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\" /targetMigration:\"{targetMigration}\"";
             
             CopyFile(migrateExecFile, $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}");
 
