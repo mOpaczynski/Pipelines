@@ -42,11 +42,14 @@ Task("Migrate-Databases")
 
             Information($"{assemblyFile.GetFilename()} /startUpConfigurationFile='{configFile}' /startUpDirectory='{assemblyFile.GetDirectory()}'");
 
+            var arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\"";
+            Information($"Arguments used: {arguments}");
+
             Process runMigrator = new Process();
             runMigrator.StartInfo.FileName = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
             ////runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /startUpDirectory:\"{assemblyFile.GetDirectory()}\" /startUpConfigurationFile:\"{configFile}\"";
             ////runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /startUpDirectory:\"{assemblyFile.GetDirectory()}\" /connectionProviderName:\"{providerName}\" /connectionString:\"{connectionString}\"";
-            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\"";
+            runMigrator.StartInfo.Arguments = arguments;
             runMigrator.StartInfo.UseShellExecute = false;
             runMigrator.StartInfo.RedirectStandardOutput = true;
             runMigrator.StartInfo.RedirectStandardError = true;
