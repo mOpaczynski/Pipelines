@@ -36,6 +36,8 @@ Task("Migrate-Databases")
             
             CopyFile(migrateExecFile, $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}");
 
+            Information($"Arguments used: {arguments}");
+
             Process runMigrator = new Process();
             runMigrator.StartInfo.FileName = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
             runMigrator.StartInfo.Arguments = arguments;
