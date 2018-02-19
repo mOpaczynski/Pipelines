@@ -1,7 +1,8 @@
 using System.Diagnostics;
 
 var target = Argument("target", "Default");
-var configuration = Argument("configuration", "Release");
+var projectConfiguration = Argument("projectConfiguration", "Release");
+var migrationConfiguration = Argument('migrationConfiguration', 'Configuration')
 
 var solutionFilePath = GetFiles("./**/*.sln").First();
 
@@ -19,7 +20,7 @@ Task("Restore-Nuget-Packages")
 Task("Build-Solution")
     .IsDependentOn("Restore-Nuget-Packages")
     .Does(() => {
-        MSBuild(solutionFilePath, settings => settings.SetConfiguration(configuration));
+        MSBuild(solutionFilePath, settings => settings.SetConfiguration(projectConfiguration));
     });
 
 Task("Migrate-Databases")
@@ -27,6 +28,11 @@ Task("Migrate-Databases")
         Information("Migrating Databases...");
 
         var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First().FullPath;
+        var directories = GetSubDirectories("./");
+
+        foreach(var directory in directories){
+            Information(directory.directoryPath);
+        }
 
         Information(migrateExecFile);
 
