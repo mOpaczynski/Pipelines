@@ -3,7 +3,7 @@ using System.Diagnostics;
 var target = Argument("target", "Default");
 var projectConfiguration = Argument("projectConfiguration", "Release");
 var migrationConfiguration = Argument("migrationConfiguration", "Configuration");
-var targetMigration = Argument("targetMigration", "");
+var targetMigration = Argument("targetMigration", "");targetMigration
 
 var solutionFilePath = GetFiles("./**/*.sln").First();
 

@@ -11,10 +11,12 @@ pipeline {
         echo 'Running unit tets...'
       }
     }
-    stage('Test databases migrations') {
+    stage('Test database migrations') {
       steps {
 		    powershell ".\\build.ps1 -Target Migrate-Databases"
-		    powershell ".\\build.ps1 -Target Migrate-Databases -ScriptArgs '-targetMigration=\"\$InitialDatabase\"'"
+		    powershell ".\\build.ps1 -Target Migrate-Databases -ScriptArgs '-targetMigration=0'"
+        powershell ".\\build.ps1 -Target Migrate-Databases"
+        powershell ".\\build.ps1 -Target Migrate-Databases"
       }
     }
     stage('Run tests') {
