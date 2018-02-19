@@ -14,7 +14,7 @@ pipeline {
     stage('Test databases migrations') {
       steps {
 		    powershell ".\\build.ps1 -Target Migrate-Databases"
-		    powershell ".\\build.ps1 -Target Migrate-Databases -ScriptArgs '-targetMigration=\"\$InitialDatabase\""'"
+		    powershell ".\\build.ps1 -Target Migrate-Databases -ScriptArgs '-targetMigration=\"\$InitialDatabase\"'"
       }
     }
     stage('Run tests') {
