@@ -1,4 +1,4 @@
-#tool "nuget:?package=NUnit.Runners&version=3.8.0"
+#tool "nuget:?package=NUnit.ConsoleRunner"
 
 using System.Diagnostics;
 
