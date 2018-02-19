@@ -34,27 +34,27 @@ Task("Migrate-Databases")
             Information(configFile);
             var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
             Information(assemblyFile);
-        }
 
-        Information(migrateExecFile);
+            Information(migrateExecFile);
 
-        Process runMigrator = new Process();
-        runMigrator.StartInfo.FileName = migrateExecFile;
-        runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFileName()} {migrationConfiguration} /startUpConfigurationFile='{configFile}' /startUpDirectory='{assemblyFile.GetDirectory()}'";
-        runMigrator.StartInfo.UseShellExecute = false;
-        runMigrator.StartInfo.RedirectStandardOutput = true;
-        runMigrator.StartInfo.RedirectStandardError = true;
-        runMigrator.OutputDataReceived += (s, e) => Console.WriteLine(e.Data);
-        runMigrator.ErrorDataReceived += (s, e) => Console.WriteLine(e.Data);
+            Process runMigrator = new Process();
+            runMigrator.StartInfo.FileName = migrateExecFile;
+            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFileName()} {migrationConfiguration} /startUpConfigurationFile='{configFile}' /startUpDirectory='{assemblyFile.GetDirectory()}'";
+            runMigrator.StartInfo.UseShellExecute = false;
+            runMigrator.StartInfo.RedirectStandardOutput = true;
+            runMigrator.StartInfo.RedirectStandardError = true;
+            runMigrator.OutputDataReceived += (s, e) => Console.WriteLine(e.Data);
+            runMigrator.ErrorDataReceived += (s, e) => Console.WriteLine(e.Data);
 
-        runMigrator.Start();
-        runMigrator.BeginOutputReadLine();
-        runMigrator.BeginErrorReadLine();
-        runMigrator.WaitForExit();
+            runMigrator.Start();
+            runMigrator.BeginOutputReadLine();
+            runMigrator.BeginErrorReadLine();
+            runMigrator.WaitForExit();
 
-        if (runMigrator.ExitCode != 0) 
-        {
-            throw new Exception($"Migrate.exe: Process returned an error (exit code {runMigrator.ExitCode}).");
+            if (runMigrator.ExitCode != 0) 
+            {
+                throw new Exception($"Migrate.exe: Process returned an error (exit code {runMigrator.ExitCode}).");
+            }
         }
     });
 
