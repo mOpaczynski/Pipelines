@@ -25,7 +25,7 @@ Task("Build-Solution")
 
 Task("Migrate-Databases")
     .Does(() => {
-        var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First().FullPath;
+        var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First();
         var dataAccessDirectories = GetSubDirectories("./").Where(x => x.FullPath.Contains(".DataAccess"));
 
         foreach(var dataAccessDirectory in dataAccessDirectories){
@@ -33,7 +33,7 @@ Task("Migrate-Databases")
             var configFile = GetFiles($"{dataAccessDirectory.FullPath}/*.config").First();
             Information(configFile);
             var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
-            CopyFile(migrateExecFile, $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}")
+            CopyFile(migrateExecFile, $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}");
             Information(assemblyFile);
 
             Information(migrateExecFile);
