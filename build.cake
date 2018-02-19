@@ -42,7 +42,7 @@ Task("Migrate-Databases")
 
             Process runMigrator = new Process();
             runMigrator.StartInfo.FileName = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
-            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /verbose /startUpConfigurationFile=\"{configFile}\" /startUpDirectory=\"{assemblyFile.GetDirectory()}\" /verbose";
+            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} /verbose /startUpConfigurationFile=\"{configFile}\" /startUpDirectory=\"{assemblyFile.GetDirectory()}\"";
             runMigrator.StartInfo.UseShellExecute = false;
             runMigrator.StartInfo.RedirectStandardOutput = true;
             runMigrator.StartInfo.RedirectStandardError = true;
