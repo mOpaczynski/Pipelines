@@ -26,13 +26,13 @@ Task("Build-Solution")
 Task("Migrate-Databases")
     .Does(() => {
         var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First().FullPath;
-        var directories = GetSubDirectories("./").Where(x => x.FullPath.Contains(".DataAccess"));
+        var dataAccessDirectories = GetSubDirectories("./").Where(x => x.FullPath.Contains(".DataAccess"));
 
-        foreach(var directory in directories){
-            Information(directory.ToString());
-            var configFile = GetFiles($"{directory.FullPath}/*.config").First();
+        foreach(var dataAccessDirectory in dataAccessDirectories){
+            Information(dataAccessDirectory.ToString());
+            var configFile = GetFiles($"{dataAccessDirectory.FullPath}/*.config").First();
             Information(configFile);
-            var assemblyFile = GetFiles($"{directory.FullPath}/**/{directory.Segments.Last()}.dll").First();
+            var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
             Information(assemblyFile);
         }
 
@@ -40,7 +40,7 @@ Task("Migrate-Databases")
 
         Process runMigrator = new Process();
         runMigrator.StartInfo.FileName = migrateExecFile;
-        runMigrator.StartInfo.Arguments = "dasdasd asdasdsad";
+        runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFileName()} {migrationConfiguration} /startUpConfigurationFile='{configFile}' /startUpDirectory='{assemblyFile.GetDirectory()}'";
         runMigrator.StartInfo.UseShellExecute = false;
         runMigrator.StartInfo.RedirectStandardOutput = true;
         runMigrator.StartInfo.RedirectStandardError = true;
