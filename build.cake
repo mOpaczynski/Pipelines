@@ -1,3 +1,5 @@
+#tool "nuget:?package=NUnit.Runners&version=3.8.0"
+
 using System.Diagnostics;
 
 var target = Argument("target", "Default");
