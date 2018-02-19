@@ -28,7 +28,7 @@ Task("Migrate-Databases")
         Information("Migrating Databases...");
 
         var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First().FullPath;
-        var directories = GetSubDirectories("./");
+        var directories = GetSubDirectories("./**/*.DataAccess");
 
         foreach(var directory in directories){
             Information(directory.ToString());
