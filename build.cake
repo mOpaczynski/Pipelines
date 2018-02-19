@@ -25,13 +25,15 @@ Task("Build-Solution")
 
 Task("Migrate-Databases")
     .Does(() => {
-        Information("Migrating Databases...");
-
         var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First().FullPath;
         var directories = GetSubDirectories("./").Where(x => x.FullPath.Contains(".DataAccess"));
 
         foreach(var directory in directories){
             Information(directory.ToString());
+            var configFile = GetFiles($"{directory.FullPath}/*.config").First();
+            Information(configFile);
+            var assemblyFile = GetFiles($"{directory.FullPath}/**/{directory.Segments.Last()}.config").First();
+            Information(assemblyFile);
         }
 
         Information(migrateExecFile);
