@@ -39,7 +39,7 @@ Task("Migrate-Databases")
 
             Process runMigrator = new Process();
             runMigrator.StartInfo.FileName = migrateExecFile;
-            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFileName()} {migrationConfiguration} /startUpConfigurationFile='{configFile}' /startUpDirectory='{assemblyFile.GetDirectory()}'";
+            runMigrator.StartInfo.Arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startUpConfigurationFile='{configFile}' /startUpDirectory='{assemblyFile.GetDirectory()}'";
             runMigrator.StartInfo.UseShellExecute = false;
             runMigrator.StartInfo.RedirectStandardOutput = true;
             runMigrator.StartInfo.RedirectStandardError = true;
