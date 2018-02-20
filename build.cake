@@ -40,9 +40,9 @@ Task("Migrate-Databases-And-Test-Seeds")
 Task("Run-Unit-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/JenkinsTests.dll");
-        var settings = new Nunit3Settings {
+        var settings = new NUnit3Settings {
             Results = "UnitTestsResult.xml"
-        }
+        };
 
         NUnit3(testAssemblies, settings);
     });
@@ -50,9 +50,9 @@ Task("Run-Unit-Tests")
 Task("Run-Api-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/ApiTests.dll");
-        var settings = new Nunit3Settings {
+        var settings = new NUnit3Settings {
             Results = "ApiTestsResult.xml"
-        }
+        };
 
         NUnit3(testAssemblies, settings);
     });
@@ -60,9 +60,9 @@ Task("Run-Api-Tests")
 Task("Run-Ui-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/UiTests.dll");
-        var settings = new Nunit3Settings {
+        var settings = new NUnit3Settings {
             Results = "UiTestsResult.xml"
-        }
+        };
 
         NUnit3(testAssemblies, settings);
     });
