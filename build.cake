@@ -61,12 +61,13 @@ private void MigrateDatabases(int? targetMigration = null){
     foreach(var dataAccessDirectory in dataAccessDirectories){
         var configFile = GetFiles($"{dataAccessDirectory.FullPath}/*.config").First();
         var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
+        var migrateExecFileCopy = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
         var arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\" /targetMigration:\"{targetMigration}\" /verbose";
             
-        CopyFile(migrateExecFile, $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}");
+        CopyFile(migrateExecFile, migrateExecFileCopy);
 
         Process runMigrator = new Process();
-        runMigrator.StartInfo.FileName = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
+        runMigrator.StartInfo.FileName = migrateExecFileCopy;
         runMigrator.StartInfo.Arguments = arguments;
         runMigrator.StartInfo.UseShellExecute = false;
         runMigrator.StartInfo.RedirectStandardOutput = true;
