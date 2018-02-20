@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    CAKE_EXE = ".\\tools\\Cake.0.25.0\\cake.exe"
+  }
   options {
     disableConcurrentBuilds()
   }
@@ -11,24 +14,24 @@ pipeline {
     }
     stage('Run unit tests') {
       steps {
-        powershell ".\\build.ps1 -Target Run-Unit-Tests"
+        powershell "$CAKE_EXE build.cake -Target Run-Unit-Tests"
       }
     }
     stage('Test database migrations') {
       steps {
-		    powershell ".\\build.ps1 -Target Migrate-Databases-And-Test-Seeds"
+		    powershell "$CAKE_EXE -Target Migrate-Databases-And-Test-Seeds"
       }
     }
     stage('Run tests') {
       parallel {
         stage('API tests'){
           steps{
-            powershell ".\\build.ps1 -Target Run-Api-Tests"
+            powershell "$CAKE_EXE -Target Run-Api-Tests"
           }
         }
         stage("UI tests"){
           steps{
-            powershell ".\\build.ps1 -Target Run-Ui-Tests"
+            powershell "$CAKE_EXE -Target Run-Ui-Tests"
           }
         }
       }
