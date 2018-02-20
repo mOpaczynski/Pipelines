@@ -41,7 +41,7 @@ Task("Run-Unit-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/JenkinsTests.dll");
         var settings = new NUnit3Settings {
-            Results = "UnitTestsResult.xml"
+            Results = new[] { new NUnit3Result {FileName = "UnitTestsResult.xml"}}
         };
 
         NUnit3(testAssemblies, settings);
@@ -51,7 +51,7 @@ Task("Run-Api-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/ApiTests.dll");
         var settings = new NUnit3Settings {
-            Results = "ApiTestsResult.xml"
+            Results = new[] { new NUnit3Result {FileName = "ApiTestsResult.xml"}}
         };
 
         NUnit3(testAssemblies, settings);
@@ -61,7 +61,7 @@ Task("Run-Ui-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/UiTests.dll");
         var settings = new NUnit3Settings {
-            Results = "UiTestsResult.xml"
+            Results = new[] { new NUnit3Result {FileName = "UiTestsResult.xml"}}
         };
 
         NUnit3(testAssemblies, settings);
