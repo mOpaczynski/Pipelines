@@ -14,11 +14,6 @@ pipeline {
         powershell ".\\build.ps1 -Target Run-Unit-Tests"
       }
     }
-    post {
-      always {
-        nunit healthScaleFactor: 10.0, testResultsPattern: 'TestResult.xml'
-      }
-    }
     stage('Test database migrations') {
       steps {
 		    powershell ".\\build.ps1 -Target Migrate-Databases-And-Test-Seeds"
@@ -46,6 +41,11 @@ pipeline {
       steps {
         echo 'Deploying...'
       }
+    }
+  }
+  post {
+    always {
+      nunit healthScaleFactor: 10.0, testResultsPattern: '*Result.xml'
     }
   }
 }
