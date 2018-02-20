@@ -11,7 +11,32 @@ namespace JenkinsTests
         }
 
         [Test]
-        public void FirstTest()
+        public void FistTest()
+        {
+            int number = 10;
+
+            Assert.IsTrue(number == 10);
+        }
+
+        [Test]
+        public void SecondTest()
+        {
+            int number = 10;
+
+            Assert.IsTrue(number == 2);
+        }
+
+        [Test]
+        [Ignore("bababa")]
+        public void ThirdTest()
+        {
+            int number = 10;
+
+            Assert.IsTrue(number == 10);
+        }
+
+        [Test]
+        public void FourthTest()
         {
             int number = 10;
 
