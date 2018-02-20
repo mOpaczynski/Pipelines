@@ -39,8 +39,26 @@ Task("Migrate-Databases-And-Test-Seeds")
 
 Task("Run-Unit-Tests")
     .Does(() => {
-        var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/*Tests.dll");
-        NUnit3(testAssemblies);
+        var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/JenkinsTests.dll");
+        var arguments = "--result=UnitTestsResult.xml";
+
+        NUnit3(testAssemblies, arguments);
+    });
+
+Task("Run-Api-Tests")
+    .Does(() => {
+        var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/ApiTests.dll");
+        var arguments = "--result=ApiTestsResult.xml";
+
+        NUnit3(testAssemblies, arguments);
+    });
+
+Task("Run-Ui-Tests")
+    .Does(() => {
+        var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/UiTests.dll");
+        var arguments = "--result=UiTestsResult.xml";
+
+        NUnit3(testAssemblies, arguments);
     });
 
 Task("Default")

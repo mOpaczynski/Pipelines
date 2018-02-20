@@ -23,7 +23,7 @@ namespace JenkinsTests
         {
             int number = 10;
 
-            Assert.IsTrue(number == 10);
+            Assert.IsTrue(number == 2);
         }
 
         [Test]
