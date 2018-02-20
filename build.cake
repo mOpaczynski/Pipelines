@@ -47,6 +47,12 @@ Task("Test-Migrate-Databases")
     .Does(()=> {
     });
 
+Task("Run-Unit-Tests")
+    .Does(() => {
+        var testAssemblies = GetFiles($"./**/{projectConfiguration}/*Tests.dll");
+        NUnit3(testAssemblies);
+    });
+
 Task("Default")
     .Does(() => {
         Information("Target task was not selected, nothing will happen.");
