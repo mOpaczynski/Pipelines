@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
 
-namespace JenkinsTests
+namespace UiTests
 {
     [TestFixture]
-    public class Tests
+    public class UiTests
     {
         [OneTimeSetUp]
         public void OneTimeSetup()
