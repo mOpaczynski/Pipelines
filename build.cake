@@ -5,7 +5,6 @@ using System.Diagnostics;
 var target = Argument("target", "Default");
 var projectConfiguration = Argument("projectConfiguration", "Release");
 var migrationConfiguration = Argument("migrationConfiguration", "Configuration");
-var targetMigration = Argument("targetMigration", "");
 
 var solutionFilePath = GetFiles("./**/*.sln").First();
 
@@ -23,6 +22,19 @@ Task("Build-Solution")
 Task("Migrate-Databases")
     .Does(() => {
         MigrateDatabases();
+    });
+
+Task("RollBack-Migrations")
+    .Does(()=> {
+        MigrateDatabases(0);
+    });
+
+Task("Test-Migrate-Databases")
+    .IsDependentOn("Migrate-Databases")
+    .IsDependentOn("RollBack-Migrations")
+    .IsDependentOn("Migrate-Databases")
+    .IsDependentOn("Migrate-Databases")
+    .Does(()=> {
     });
 
 Task("Default")
