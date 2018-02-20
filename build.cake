@@ -54,7 +54,7 @@ Task("Default")
 
 RunTarget(target);
 
-private void MigrateDatabases(int targetMigration = string.Empty){
+private void MigrateDatabases(int? targetMigration = null){
     var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First();
     var dataAccessDirectories = GetSubDirectories("./").Where(x => x.FullPath.Contains(".DataAccess"));
 
