@@ -12,7 +12,7 @@ pipeline {
     stage('Run unit tests') {
       steps {
         powershell ".\\build.ps1 -Target Run-Unit-Tests"
-        nunit testResultsPattern: "./**/*TestResult.xml"
+        nunit testResultsPattern: "TestResult.xml"
       }
     }
     stage('Test database migrations') {
