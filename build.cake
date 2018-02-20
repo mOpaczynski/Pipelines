@@ -42,7 +42,7 @@ Task("Run-Unit-Tests")
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/JenkinsTests.dll");
         var settings = new NUnit3Settings {
             Results = new[] { new NUnit3Result {FileName = "UnitTestsResult.xml"}},
-            Labels = NUnit3Labels.On
+            Labels = NUnit3Labels.All
         };
 
         NUnit3(testAssemblies, settings);
@@ -53,7 +53,7 @@ Task("Run-Api-Tests")
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/ApiTests.dll");
         var settings = new NUnit3Settings {
             Results = new[] { new NUnit3Result {FileName = "ApiTestsResult.xml"}},
-            Labels = NUnit3Labels.On
+            Labels = NUnit3Labels.All
         };
 
         NUnit3(testAssemblies, settings);
@@ -64,7 +64,7 @@ Task("Run-Ui-Tests")
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/UiTests.dll");
         var settings = new NUnit3Settings {
             Results = new[] { new NUnit3Result {FileName = "UiTestsResult.xml"}},
-            Labels = NUnit3Labels.On
+            Labels = NUnit3Labels.All
         };
 
         NUnit3(testAssemblies, settings);
