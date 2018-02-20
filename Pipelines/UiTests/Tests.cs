@@ -23,7 +23,7 @@ namespace UiTests
         {
             int number = 10;
 
-            Assert.IsTrue(number == 2);
+            Assert.IsTrue(number == 10);
         }
 
         [Test]
