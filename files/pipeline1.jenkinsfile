@@ -11,13 +11,12 @@ pipeline {
     }
     stage('Run unit tests') {
       steps {
-        try {
-          powershell ".\\build.ps1 -Target Run-Unit-Tests"
-        } catch(err) {
-          nunit testResultsPattern: "TestResult.xml"
-          throw err
-        }
-        
+        powershell ".\\build.ps1 -Target Run-Unit-Tests"
+      }
+    }
+    post {
+      always {
+        nunit healthScaleFactor: 10.0, testResultsPattern: 'TestResult.xml'
       }
     }
     stage('Test database migrations') {
