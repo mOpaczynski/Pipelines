@@ -40,25 +40,31 @@ Task("Migrate-Databases-And-Test-Seeds")
 Task("Run-Unit-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/JenkinsTests.dll");
-        var arguments = "--result=UnitTestsResult.xml";
+        var settings = new Nunit3Settings {
+            Results = "UnitTestsResult.xml"
+        }
 
-        NUnit3(testAssemblies, arguments);
+        NUnit3(testAssemblies, settings);
     });
 
 Task("Run-Api-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/ApiTests.dll");
-        var arguments = "--result=ApiTestsResult.xml";
+        var settings = new Nunit3Settings {
+            Results = "ApiTestsResult.xml"
+        }
 
-        NUnit3(testAssemblies, arguments);
+        NUnit3(testAssemblies, settings);
     });
 
 Task("Run-Ui-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/UiTests.dll");
-        var arguments = "--result=UiTestsResult.xml";
+        var settings = new Nunit3Settings {
+            Results = "UiTestsResult.xml"
+        }
 
-        NUnit3(testAssemblies, arguments);
+        NUnit3(testAssemblies, settings);
     });
 
 Task("Default")
