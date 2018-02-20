@@ -17,7 +17,7 @@ pipeline {
     }
     stage('Test database migrations') {
       steps {
-		    powershell ".\\build.ps1 -Target Test-Migrate-Databases"
+		    powershell ".\\build.ps1 -Target Migrate-Databases-And-Test-Seeds"
       }
     }
     stage('Run tests') {

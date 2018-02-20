@@ -29,22 +29,12 @@ Task("Rollback-Migrations")
         MigrateDatabases(0);
     });
 
-Task("Restore-Databases-After-Rollback")
-    .Does(() => {
-        MigrateDatabases();
-    });
-
-Task("Test-Migration-Seeds")
-    .Does(() => {
-        MigrateDatabases();
-    });
-
-Task("Test-Migrate-Databases")
+Task("Migrate-Databases-And-Test-Seeds")
     .IsDependentOn("Migrate-Databases")
     .IsDependentOn("Rollback-Migrations")
-    .IsDependentOn("Restore-Databases-After-Rollback")
-    .IsDependentOn("Test-Migration-Seeds")
-    .Does(()=> {
+    .Does(() => {
+        MigrateDatabases();
+        MigrateDatabases();
     });
 
 Task("Run-Unit-Tests")
