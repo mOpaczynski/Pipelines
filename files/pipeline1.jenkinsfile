@@ -11,8 +11,13 @@ pipeline {
     }
     stage('Run unit tests') {
       steps {
-        powershell ".\\build.ps1 -Target Run-Unit-Tests"
-        nunit testResultsPattern: "TestResult.xml"
+        try {
+          powershell ".\\build.ps1 -Target Run-Unit-Tests"
+        } catch(err) {
+          nunit testResultsPattern: "TestResult.xml"
+          throw err
+        }
+        
       }
     }
     stage('Test database migrations') {

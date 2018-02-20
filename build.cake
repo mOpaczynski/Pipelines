@@ -40,7 +40,7 @@ Task("Migrate-Databases-And-Test-Seeds")
 Task("Run-Unit-Tests")
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/*Tests.dll");
-        try {NUnit3(testAssemblies);} catch (Exception e){};
+        NUnit3(testAssemblies);
     });
 
 Task("Default")
