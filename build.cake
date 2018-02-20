@@ -38,12 +38,10 @@ Task("Migrate-Databases-And-Test-Seeds")
     });
 
 Task("Run-Unit-Tests")
-    .ContinueOnError()
     .Does(() => {
         var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/*Tests.dll");
-        NUnit3(testAssemblies);
-    })
-    .DeferOnError();
+        try {NUnit3(testAssemblies);} catch (Exception e){};
+    });
 
 Task("Default")
     .Does(() => {
