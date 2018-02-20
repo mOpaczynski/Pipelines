@@ -49,7 +49,7 @@ Task("Test-Migrate-Databases")
 
 Task("Run-Unit-Tests")
     .Does(() => {
-        var testAssemblies = GetFiles($"./**/{projectConfiguration}/*Tests.dll");
+        var testAssemblies = GetFiles($"./**/bin/{projectConfiguration}/*Tests.dll");
         NUnit3(testAssemblies);
     });
 
