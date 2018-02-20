@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build solution') {
       steps {
-        powershell ".\\build.ps1 -target=Build-Solution"
+        powershell ".\\build.ps1 -Target Build-Solution"
       }
     }
     stage('Run unit tests') {
@@ -19,19 +19,19 @@ pipeline {
     }
     stage('Test database migrations') {
       steps {
-		    powershell "$CAKE_EXE -target=Migrate-Databases-And-Test-Seeds"
+		    powershell "$CAKE_EXE build.cake -target=Migrate-Databases-And-Test-Seeds"
       }
     }
     stage('Run tests') {
       parallel {
         stage('API tests'){
           steps{
-            powershell "$CAKE_EXE -target=Run-Api-Tests"
+            powershell "$CAKE_EXE build.cake -target=Run-Api-Tests"
           }
         }
         stage("UI tests"){
           steps{
-            powershell "$CAKE_EXE -target=Run-Ui-Tests"
+            powershell "$CAKE_EXE build.cake -target=Run-Ui-Tests"
           }
         }
       }
