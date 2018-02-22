@@ -18,6 +18,10 @@ namespace CakeExtensions
             context.Log.Information($"root: {root}");
 
             context.Log.Information($"searching for migrate.exe");
+            if (Directory.Exists(root))
+            {
+                context.Log.Information($"root directory exists");
+            }
             var migrateExecFile = Directory.GetFiles($"{root}/", "*migrate.exe", SearchOption.AllDirectories).First();
             context.Log.Information($"migrateExecFile: {migrateExecFile}");
             var dataAccessDirectories = Directory.GetDirectories(root, "*.DataAccess", SearchOption.AllDirectories);
