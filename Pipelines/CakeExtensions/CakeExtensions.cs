@@ -17,7 +17,8 @@ namespace CakeExtensions
             var root = GetRootPath();
             context.Log.Information($"root: {root}");
 
-            var migrateExecFile = Directory.GetFiles($"{root}/", "migrate.exe", SearchOption.AllDirectories).First();
+            context.Log.Information($"searching for migrate.exe");
+            var migrateExecFile = Directory.GetFiles($"{root}/", "*migrate.exe", SearchOption.AllDirectories).First();
             context.Log.Information($"migrateExecFile: {migrateExecFile}");
             var dataAccessDirectories = Directory.GetDirectories(root, "*.DataAccess", SearchOption.AllDirectories);
             context.Log.Information($"dataAccessDirectories: {dataAccessDirectories}");
