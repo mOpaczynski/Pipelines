@@ -22,20 +22,20 @@ Task("Build-Solution")
 
 Task("Migrate-Databases")
     .Does(() => {
-        MigrateDatabases();
+        MigrateDatabases(projectConfiguration, migrationConfiguration);
     });
 
 Task("Rollback-Migrations")
     .Does(()=> {
-        MigrateDatabases();
+        MigrateDatabases(projectConfiguration, migrationConfiguration, 0);
     });
 
 Task("Migrate-Databases-And-Test-Seeds")
     .IsDependentOn("Migrate-Databases")
     .IsDependentOn("Rollback-Migrations")
     .Does(() => {
-        MigrateDatabases();
-        MigrateDatabases();
+        MigrateDatabases(projectConfiguration, migrationConfiguration);
+        MigrateDatabases(projectConfiguration, migrationConfiguration);
     });
 
 Task("Run-Unit-Tests")
