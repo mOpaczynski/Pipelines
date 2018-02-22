@@ -20,13 +20,13 @@ namespace CakeExtensions
             context.Log.Information(Invariant($"root: {root}"));
 
             context.Log.Information(Invariant($"searching for migrate.exe"));
-            if (!Directory.Exists(root))
+            if (!Directory.Exists(root.Name))
             {
                 context.Log.Information(Invariant($"root directory not exists"));
             }
             var migrateExecFile = Directory.GetFiles(Invariant($"{root}/"), "*migrate.exe", SearchOption.AllDirectories).First();
             context.Log.Information($"migrateExecFile: {migrateExecFile}");
-            var dataAccessDirectories = Directory.GetDirectories(root, "*.DataAccess", SearchOption.AllDirectories);
+            var dataAccessDirectories = Directory.GetDirectories(root.Name, "*.DataAccess", SearchOption.AllDirectories);
             context.Log.Information($"dataAccessDirectories: {dataAccessDirectories}");
 
             foreach (var dataAccessDirectory in dataAccessDirectories)
@@ -63,18 +63,17 @@ namespace CakeExtensions
             }
         }
 
-        private static string GetRootPath()
+        private static DirectoryInfo GetRootPath()
         {
-            var currentWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
-            var uri = new Uri(currentWorkingDir).AbsolutePath;
+            DirectoryInfo currentWorkingDir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
 
             for (var i = 0; i < 3; i++)
             {
-                var index = uri.LastIndexOf("/");
-                uri = uri.Substring(0, index);
+                currentWorkingDir = currentWorkingDir.Parent;
+                Console.WriteLine(currentWorkingDir.Name);
             }
 
-            return uri;
+            return currentWorkingDir;
         }
 
         private static string GetLastSegment(string path)
