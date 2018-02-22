@@ -19,7 +19,7 @@ namespace CakeExtensions
 
             var migrateExecFile = Directory.GetFiles(root, "migrate.exe", SearchOption.AllDirectories).First();
             context.Log.Information($"migrateExecFile: {migrateExecFile}");
-            var dataAccessDirectories = Directory.GetDirectories(root, "*.DataAccess", SearchOption.TopDirectoryOnly);
+            var dataAccessDirectories = Directory.GetDirectories(root, "*.DataAccess", SearchOption.AllDirectories);
             context.Log.Information($"dataAccessDirectories: {dataAccessDirectories}");
 
             foreach (var dataAccessDirectory in dataAccessDirectories)
