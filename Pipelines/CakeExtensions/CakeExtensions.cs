@@ -73,11 +73,9 @@ namespace CakeExtensions
 
         private static string GetLastSegment(string path)
         {
-            var uri = new Uri(path).AbsolutePath;
+            DirectoryInfo uri = new DirectoryInfo(path);
 
-            var index = uri.LastIndexOf("/");
-
-            return uri.Substring(index + 1);
+            return uri.Name;
         }
     }
 }
