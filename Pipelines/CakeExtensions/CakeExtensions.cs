@@ -31,6 +31,7 @@ namespace CakeExtensions
 
             foreach (var dataAccessDirectory in dataAccessDirectories)
             {
+                context.Log.Information($"Data acc dir: {dataAccessDirectory}");
                 var configFilePath = Directory.GetFiles(dataAccessDirectory, "App.config", SearchOption.TopDirectoryOnly).First();
                 context.Log.Information($"configFilePath: {configFilePath}");
                 var assembyFilePath = Directory.GetFiles(dataAccessDirectory, $"{GetLastSegment(dataAccessDirectory)}.dll", SearchOption.AllDirectories).First(x => x.Contains("bin") && x.Contains($"{projectConfiguration}"));
@@ -67,13 +68,7 @@ namespace CakeExtensions
         {
             DirectoryInfo currentWorkingDir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
 
-            for (var i = 0; i < 3; i++)
-            {
-                currentWorkingDir = currentWorkingDir.Parent;
-                Console.WriteLine(currentWorkingDir.FullName);
-            }
-
-            return currentWorkingDir;
+            return currentWorkingDir.Parent.Parent;
         }
 
         private static string GetLastSegment(string path)
