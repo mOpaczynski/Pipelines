@@ -14,16 +14,23 @@ namespace CakeExtensions
         public static void MigrateDatabases(this ICakeContext context, string projectConfiguration = "Debug", string migrationConfiguration = "Configuration", int? targetMigration = null)
         {
             var root = GetRootPath();
+            context.Log.Information($"root: {root}");
 
             var migrateExecFile = Directory.GetFiles(root, "migrate.exe", SearchOption.AllDirectories).First();
+            context.Log.Information($"migrateExecFile: {migrateExecFile}");
             var dataAccessDirectories = Directory.GetDirectories(root, "*.DataAccess", SearchOption.TopDirectoryOnly);
+            context.Log.Information($"dataAccessDirectories: {dataAccessDirectories}");
 
             foreach (var dataAccessDirectory in dataAccessDirectories)
             {
                 var configFilePath = Directory.GetFiles(dataAccessDirectory, "App.config", SearchOption.TopDirectoryOnly).First();
+                context.Log.Information($"configFilePath: {configFilePath}");
                 var assembyFilePath = Directory.GetFiles(dataAccessDirectory, $"{GetLastSegment(dataAccessDirectory)}.dll", SearchOption.AllDirectories).First(x => x.Contains("bin") && x.Contains($"{projectConfiguration}"));
+                context.Log.Information($"assembyFilePath: {assembyFilePath}");
                 var migrateExecFileCopyPath = $"{Path.GetDirectoryName(assembyFilePath)}/migrate.exe";
+                context.Log.Information($"migrateExecFileCopyPath: {migrateExecFileCopyPath}");
                 var arguments = $"{GetLastSegment(assembyFilePath)} {migrationConfiguration} /startupConfigurationFile:\"{configFilePath}\" /targetMigration:\"{targetMigration}\" /verbose";
+                context.Log.Information($"arguments: {arguments}");
 
                 File.Copy(migrateExecFile, migrateExecFileCopyPath, true);
 
@@ -46,33 +53,6 @@ namespace CakeExtensions
                     throw new Exception($"Migrate.exe: Process returned an error (exit code {runMigrator.ExitCode}).");
                 }
             }
-
-            //foreach(var dataAccessDirectory in dataAccessDirectories){
-            //    var configFile = GetFiles($"{dataAccessDirectory.FullPath}/*.config").First();
-            //    var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
-            //    var migrateExecFileCopy = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
-            //    var arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\" /targetMigration:\"{targetMigration}\" /verbose";
-
-            //    CopyFile(migrateExecFile, migrateExecFileCopy);
-
-            //    Process runMigrator = new Process();
-            //    runMigrator.StartInfo.FileName = migrateExecFileCopy;
-            //    runMigrator.StartInfo.Arguments = arguments;
-            //    runMigrator.StartInfo.UseShellExecute = false;
-            //    runMigrator.StartInfo.RedirectStandardOutput = true;
-            //    runMigrator.StartInfo.RedirectStandardError = true;
-            //    runMigrator.OutputDataReceived += (s, e) => Console.WriteLine(e.Data);
-            //    runMigrator.ErrorDataReceived += (s, e) => Console.WriteLine(e.Data);
-
-            //    runMigrator.Start();
-            //    runMigrator.BeginOutputReadLine();
-            //    runMigrator.BeginErrorReadLine();
-            //    runMigrator.WaitForExit();
-
-            //    if (runMigrator.ExitCode != 0)
-            //    {
-            //        throw new Exception($"Migrate.exe: Process returned an error (exit code {runMigrator.ExitCode}).");
-            //    }
         }
 
         private static string GetRootPath()
