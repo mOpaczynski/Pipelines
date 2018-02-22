@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Cake.Core;
 using Cake.Core.Annotations;
+using Cake.Core.Diagnostics;
 
 namespace CakeExtensions
 {
@@ -26,16 +27,14 @@ namespace CakeExtensions
 
                 File.Copy(migrateExecFile, migrateExecFileCopyPath, true);
 
-                Console.WriteLine(migrateExecFileCopyPath);
-
                 Process runMigrator = new Process();
                 runMigrator.StartInfo.FileName = migrateExecFileCopyPath;
                 runMigrator.StartInfo.Arguments = arguments;
                 runMigrator.StartInfo.UseShellExecute = false;
                 runMigrator.StartInfo.RedirectStandardOutput = true;
                 runMigrator.StartInfo.RedirectStandardError = true;
-                runMigrator.OutputDataReceived += (s, e) => Console.WriteLine(e.Data);
-                runMigrator.ErrorDataReceived += (s, e) => Console.WriteLine(e.Data);
+                runMigrator.OutputDataReceived += (s, e) => context.Log.Information(e.Data);
+                runMigrator.ErrorDataReceived += (s, e) => context.Log.Information(e.Data);
 
                 runMigrator.Start();
                 runMigrator.BeginOutputReadLine();
