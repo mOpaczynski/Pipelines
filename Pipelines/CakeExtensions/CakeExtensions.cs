@@ -6,8 +6,10 @@ using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.Diagnostics;
 
+[assembly: CakeNamespaceImport("CakeExtensions.Common")]
 namespace CakeExtensions
 {
+    [CakeNamespaceImport("CakeExtensions.Common")]
     public static class CakeExtensions
     {
         [CakeMethodAlias]
