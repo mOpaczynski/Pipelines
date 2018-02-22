@@ -42,5 +42,11 @@ namespace JenkinsTests
 
             Assert.IsTrue(number == 10);
         }
+
+        [Test]
+        public void Migrate()
+        {
+            ////MigrateDatabases();
+        }
     }
 }

@@ -1,4 +1,5 @@
 #tool "nuget:?package=NUnit.ConsoleRunner"
+#r "tools/CakeExtensions.dll"
 
 using System.Diagnostics;
 
@@ -26,7 +27,7 @@ Task("Migrate-Databases")
 
 Task("Rollback-Migrations")
     .Does(()=> {
-        MigrateDatabases(0);
+        MigrateDatabases();
     });
 
 Task("Migrate-Databases-And-Test-Seeds")
@@ -77,7 +78,7 @@ Task("Default")
 
 RunTarget(target);
 
-private void MigrateDatabases(int? targetMigration = null){
+private void MigrateDatabases2(int? targetMigration = null){
     var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First();
     var dataAccessDirectories = GetSubDirectories("./").Where(x => x.FullPath.Contains(".DataAccess"));
 

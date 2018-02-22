@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsTests", "JenkinsTests\JenkinsTests.csproj", "{76072857-D396-4948-A19B-A8DA13FC7F7A}"
 EndProject
@@ -14,11 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{2DCC6D30
 		..\powershelltest.ps1 = ..\powershelltest.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog1.DataAccess", "..\Blog1.DataAccess\Blog1.DataAccess.csproj", "{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTests", "UnitTestProject1\ApiTests.csproj", "{E173B666-13E1-4041-9E76-3448B2EDF81B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UiTests", "UiTests\UiTests.csproj", "{D2DB3F91-E7D6-44EE-A31A-08051D17B316}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeExtensions", "CakeExtensions\CakeExtensions.csproj", "{66E2AC8A-D7AF-440B-B066-A6D4311675CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog1.DataAccess", "Blog1.DataAccess\Blog1.DataAccess.csproj", "{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,22 +50,6 @@ Global
 		{76072857-D396-4948-A19B-A8DA13FC7F7A}.Release|x64.Build.0 = Release|Any CPU
 		{76072857-D396-4948-A19B-A8DA13FC7F7A}.Release|x86.ActiveCfg = Release|Any CPU
 		{76072857-D396-4948-A19B-A8DA13FC7F7A}.Release|x86.Build.0 = Release|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|ARM.Build.0 = Debug|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|x64.Build.0 = Debug|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|x86.Build.0 = Debug|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|ARM.ActiveCfg = Release|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|ARM.Build.0 = Release|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|x64.ActiveCfg = Release|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|x64.Build.0 = Release|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|x86.ActiveCfg = Release|Any CPU
-		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|x86.Build.0 = Release|Any CPU
 		{E173B666-13E1-4041-9E76-3448B2EDF81B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E173B666-13E1-4041-9E76-3448B2EDF81B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E173B666-13E1-4041-9E76-3448B2EDF81B}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -96,6 +82,38 @@ Global
 		{D2DB3F91-E7D6-44EE-A31A-08051D17B316}.Release|x64.Build.0 = Release|Any CPU
 		{D2DB3F91-E7D6-44EE-A31A-08051D17B316}.Release|x86.ActiveCfg = Release|Any CPU
 		{D2DB3F91-E7D6-44EE-A31A-08051D17B316}.Release|x86.Build.0 = Release|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Debug|ARM.Build.0 = Debug|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Debug|x64.Build.0 = Debug|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Debug|x86.Build.0 = Debug|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Release|ARM.ActiveCfg = Release|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Release|ARM.Build.0 = Release|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Release|x64.ActiveCfg = Release|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Release|x64.Build.0 = Release|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Release|x86.ActiveCfg = Release|Any CPU
+		{66E2AC8A-D7AF-440B-B066-A6D4311675CA}.Release|x86.Build.0 = Release|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|x64.Build.0 = Debug|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Debug|x86.Build.0 = Debug|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|ARM.Build.0 = Release|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|x64.ActiveCfg = Release|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|x64.Build.0 = Release|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|x86.ActiveCfg = Release|Any CPU
+		{FCC06D24-D7BF-4D50-A1BE-FB99330229B9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
