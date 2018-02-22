@@ -80,7 +80,7 @@ namespace CakeExtensions
             var currentWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
             var uri = new Uri(currentWorkingDir).AbsolutePath;
 
-            for (var i = 0; i < 3; i++)
+            for (var i = 0; i < 2; i++)
             {
                 var index = uri.LastIndexOf("/");
                 uri = uri.Substring(0, index);
