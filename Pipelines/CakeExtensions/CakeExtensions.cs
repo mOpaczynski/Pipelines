@@ -13,7 +13,7 @@ namespace CakeExtensions
     public static class CakeExtensions
     {
         [CakeMethodAlias]
-        public static void MigrateDatabases(this ICakeContext context, string projectConfiguration = "Debug", string migrationConfiguration = "Configuration", int? targetMigration = null)
+        public static void MigrateDatabases(this ICakeContext context, string projectConfiguration = "Release", string migrationConfiguration = "Configuration", int? targetMigration = null)
         {
             context.Log.Information("hello");
             var root = GetRootPath();
@@ -24,7 +24,7 @@ namespace CakeExtensions
             {
                 context.Log.Information(Invariant($"root directory not exists"));
             }
-            var migrateExecFile = Directory.GetFiles(Invariant($"{root.FullName}"), "*migrate.exe", SearchOption.AllDirectories).First();
+            var migrateExecFile = Directory.GetFiles(Invariant($"{root.FullName}"), "migrate.exe", SearchOption.AllDirectories).First();
             context.Log.Information($"migrateExecFile: {migrateExecFile}");
             var dataAccessDirectories = Directory.GetDirectories(root.FullName, "*.DataAccess", SearchOption.AllDirectories);
             context.Log.Information($"dataAccessDirectories: {dataAccessDirectories}");
@@ -38,7 +38,7 @@ namespace CakeExtensions
                 context.Log.Information($"assembyFilePath: {assembyFilePath}");
                 var migrateExecFileCopyPath = $"{Path.GetDirectoryName(assembyFilePath)}/migrate.exe";
                 context.Log.Information($"migrateExecFileCopyPath: {migrateExecFileCopyPath}");
-                var arguments = $"{GetLastSegment(assembyFilePath)} {migrationConfiguration} /startupConfigurationFile:\"{configFilePath}\" /targetMigration:\"{targetMigration}\" /verbose";
+                var arguments = $"{GetLastSegment(dataAccessDirectory)}.dll {migrationConfiguration} /startupConfigurationFile:\"{configFilePath}\" /targetMigration:\"{targetMigration}\" /verbose";
                 context.Log.Information($"arguments: {arguments}");
 
                 File.Copy(migrateExecFile, migrateExecFileCopyPath, true);
