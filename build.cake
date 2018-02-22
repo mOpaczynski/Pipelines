@@ -1,5 +1,5 @@
 #tool "nuget:?package=NUnit.ConsoleRunner"
-#r "tools/CakeExtensions.dll"
+#r "tools/CakeExtensions/CakeExtensions.dll"
 
 using System.Diagnostics;
 
