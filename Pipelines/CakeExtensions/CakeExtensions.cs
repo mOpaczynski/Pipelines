@@ -41,7 +41,10 @@ namespace CakeExtensions
                 var arguments = $"{GetLastSegment(dataAccessDirectory)}.dll {migrationConfiguration} /startupConfigurationFile:\"{configFilePath}\" /targetMigration:\"{targetMigration}\" /verbose";
                 context.Log.Information($"arguments: {arguments}");
 
-                File.Copy(migrateExecFile, migrateExecFileCopyPath, true);
+                if (!File.Exists(migrateExecFileCopyPath))
+                {
+                    File.Copy(migrateExecFile, migrateExecFileCopyPath, true);
+                }
 
                 Process runMigrator = new Process();
                 runMigrator.StartInfo.FileName = migrateExecFileCopyPath;
