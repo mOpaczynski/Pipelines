@@ -17,14 +17,14 @@ namespace CakeExtensions
         {
             context.Log.Information("hello");
             var root = GetRootPath();
-            context.Log.Information(Invariant($"root: {root}"));
+            context.Log.Information(Invariant($"root: {root.FullName}"));
 
             context.Log.Information(Invariant($"searching for migrate.exe"));
             if (!Directory.Exists(root.FullName))
             {
                 context.Log.Information(Invariant($"root directory not exists"));
             }
-            var migrateExecFile = Directory.GetFiles(Invariant($"{root}/"), "*migrate.exe", SearchOption.AllDirectories).First();
+            var migrateExecFile = Directory.GetFiles(Invariant($"{root.FullName}"), "*migrate.exe", SearchOption.AllDirectories).First();
             context.Log.Information($"migrateExecFile: {migrateExecFile}");
             var dataAccessDirectories = Directory.GetDirectories(root.FullName, "*.DataAccess", SearchOption.AllDirectories);
             context.Log.Information($"dataAccessDirectories: {dataAccessDirectories}");
@@ -70,7 +70,7 @@ namespace CakeExtensions
             for (var i = 0; i < 3; i++)
             {
                 currentWorkingDir = currentWorkingDir.Parent;
-                Console.WriteLine(currentWorkingDir.Name);
+                Console.WriteLine(currentWorkingDir.FullName);
             }
 
             return currentWorkingDir;
