@@ -13,6 +13,7 @@ namespace CakeExtensions
         [CakeMethodAlias]
         public static void MigrateDatabases(this ICakeContext context, string projectConfiguration = "Debug", string migrationConfiguration = "Configuration", int? targetMigration = null)
         {
+            context.Log.Information("hello");
             var root = GetRootPath();
             context.Log.Information($"root: {root}");
 
@@ -60,7 +61,7 @@ namespace CakeExtensions
             var currentWorkingDir = AppDomain.CurrentDomain.BaseDirectory;
             var uri = new Uri(currentWorkingDir).AbsolutePath;
 
-            for (var i = 0; i < 2; i++)
+            for (var i = 0; i < 3; i++)
             {
                 var index = uri.LastIndexOf("/");
                 uri = uri.Substring(0, index);
