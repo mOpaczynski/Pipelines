@@ -20,9 +20,9 @@ namespace CakeExtensions
             context.Log.Information(Invariant($"root: {root}"));
 
             context.Log.Information(Invariant($"searching for migrate.exe"));
-            if (Directory.Exists(root))
+            if (!Directory.Exists(root))
             {
-                context.Log.Information(Invariant($"root directory exists"));
+                context.Log.Information(Invariant($"root directory not exists"));
             }
             var migrateExecFile = Directory.GetFiles(Invariant($"{root}/"), "*migrate.exe", SearchOption.AllDirectories).First();
             context.Log.Information($"migrateExecFile: {migrateExecFile}");
