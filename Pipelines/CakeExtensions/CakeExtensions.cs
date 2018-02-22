@@ -6,6 +6,8 @@ using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.Diagnostics;
 
+using static System.FormattableString;
+
 namespace CakeExtensions
 {
     public static class CakeExtensions
@@ -15,14 +17,14 @@ namespace CakeExtensions
         {
             context.Log.Information("hello");
             var root = GetRootPath();
-            context.Log.Information($"root: {root}");
+            context.Log.Information(Invariant($"root: {root}"));
 
-            context.Log.Information($"searching for migrate.exe");
+            context.Log.Information(Invariant($"searching for migrate.exe"));
             if (Directory.Exists(root))
             {
-                context.Log.Information($"root directory exists");
+                context.Log.Information(Invariant($"root directory exists"));
             }
-            var migrateExecFile = Directory.GetFiles($"{root}/", "*migrate.exe", SearchOption.AllDirectories).First();
+            var migrateExecFile = Directory.GetFiles(Invariant($"{root}/"), "*migrate.exe", SearchOption.AllDirectories).First();
             context.Log.Information($"migrateExecFile: {migrateExecFile}");
             var dataAccessDirectories = Directory.GetDirectories(root, "*.DataAccess", SearchOption.AllDirectories);
             context.Log.Information($"dataAccessDirectories: {dataAccessDirectories}");
