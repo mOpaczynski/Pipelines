@@ -31,12 +31,18 @@ namespace CakeExtensions
                     File.Copy(migrateExecFile, migrateExecFileCopyPath);
                 }
 
-                Process runMigrator = new Process();
-                runMigrator.StartInfo.FileName = migrateExecFileCopyPath;
-                runMigrator.StartInfo.Arguments = migrateExecArguments;
-                runMigrator.StartInfo.UseShellExecute = false;
-                runMigrator.StartInfo.RedirectStandardOutput = true;
-                runMigrator.StartInfo.RedirectStandardError = true;
+                var runMigrator = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = migrateExecFileCopyPath,
+                        Arguments = migrateExecArguments,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true
+                    }
+                };
+
                 runMigrator.OutputDataReceived += (s, e) => context.Log.Information(e.Data);
                 runMigrator.ErrorDataReceived += (s, e) => context.Log.Information(e.Data);
 
@@ -54,16 +60,12 @@ namespace CakeExtensions
 
         private static DirectoryInfo GetRootPath()
         {
-            DirectoryInfo currentWorkingDir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-
-            return currentWorkingDir.Parent.Parent;
+            return new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent;
         }
 
         private static string GetLastSegment(string path)
         {
-            DirectoryInfo uri = new DirectoryInfo(path);
-
-            return uri.Name;
+            return new DirectoryInfo(path).Name;
         }
     }
 }
