@@ -1,7 +1,6 @@
 #tool "nuget:?package=NUnit.ConsoleRunner"
+#tool "nuget:?package=OctopusTools"
 #r "tools/CakeExtensions/CakeExtensions.dll"
-
-using System.Diagnostics;
 
 var target = Argument("target", "Default");
 var projectConfiguration = Argument("projectConfiguration", "Release");
@@ -71,42 +70,14 @@ Task("Run-Ui-Tests")
         NUnit3(testAssemblies, settings);
     });
 
+Task("Octopus-Package")
+.Does(() => {
+        echo "Packing octopus";
+});
+
 Task("Default")
     .Does(() => {
         Information("Target task was not selected, nothing will happen.");
     });
 
 RunTarget(target);
-
-private void MigrateDatabases2(int? targetMigration = null){
-    var migrateExecFile = GetFiles("./**/packages/EntityFramework*/tools/migrate.exe").First();
-    var dataAccessDirectories = GetSubDirectories("./").Where(x => x.FullPath.Contains(".DataAccess"));
-
-    foreach(var dataAccessDirectory in dataAccessDirectories){
-        var configFile = GetFiles($"{dataAccessDirectory.FullPath}/*.config").First();
-        var assemblyFile = GetFiles($"{dataAccessDirectory.FullPath}/**/{projectConfiguration}/{dataAccessDirectory.Segments.Last()}.dll").First();
-        var migrateExecFileCopy = $"{assemblyFile.GetDirectory()}/{migrateExecFile.Segments.Last()}";
-        var arguments = $"{assemblyFile.GetFilename()} {migrationConfiguration} /startupConfigurationFile:\"{configFile}\" /targetMigration:\"{targetMigration}\" /verbose";
-            
-        CopyFile(migrateExecFile, migrateExecFileCopy);
-
-        Process runMigrator = new Process();
-        runMigrator.StartInfo.FileName = migrateExecFileCopy;
-        runMigrator.StartInfo.Arguments = arguments;
-        runMigrator.StartInfo.UseShellExecute = false;
-        runMigrator.StartInfo.RedirectStandardOutput = true;
-        runMigrator.StartInfo.RedirectStandardError = true;
-        runMigrator.OutputDataReceived += (s, e) => Console.WriteLine(e.Data);
-        runMigrator.ErrorDataReceived += (s, e) => Console.WriteLine(e.Data);
-
-        runMigrator.Start();
-        runMigrator.BeginOutputReadLine();
-        runMigrator.BeginErrorReadLine();
-        runMigrator.WaitForExit();
-
-        if (runMigrator.ExitCode != 0)
-        {
-            throw new Exception($"Migrate.exe: Process returned an error (exit code {runMigrator.ExitCode}).");
-        }
-    }
-}
