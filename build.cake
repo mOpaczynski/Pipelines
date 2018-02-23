@@ -82,7 +82,7 @@ Task("Octopus-Package")
             Summary = "Summary",
             ProjectUrl = new Uri("http://the-project-url.pl"),
             Files = new[] {
-                    new NuSpecContent {Source = "JenkinsTests.dll", Target = "bin"}
+                    new NuSpecContent {Source = "C:\\Users\\mopaczynski\\Source\\Repos\\Pipelines\\Pipelines\\JenkinsTests\\bin\\Release\\JenkinsTests.dll", Target = "bin"}
                 },
             BasePath = "C:\\Users\\mopaczynski\\Source\\Repos\\Pipelines\\Pipelines\\JenkinsTests\\bin\\Release",
             OutputDirectory = "C:\\Users\\mopaczynski\\Source\\Repos\\Pipelines\\"
