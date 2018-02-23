@@ -72,7 +72,7 @@ Task("Run-Ui-Tests")
 
 Task("Octopus-Package")
 .Does(() => {
-        echo "Packing octopus";
+        Information("Packing octopus");
 });
 
 Task("Default")
