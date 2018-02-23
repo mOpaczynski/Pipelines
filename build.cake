@@ -71,7 +71,7 @@ Task("Run-Ui-Tests")
     });
 
 Task("Octopus-Package")
-.Does(() => {
+    .Does(() => {
         Information("Packing octopus");
         var nuGetPackageSettings = new NuGetPackSettings{
             Id = "Pipelines",
@@ -90,6 +90,16 @@ Task("Octopus-Package")
 
         NuGetPack(nuGetPackageSettings);
 });
+
+Task("Octopus-Push")
+    .IsDependentOn("Octopus-Package")
+    .Does(() => {
+        Information("Pushing package to octopus");
+        OctoPush("http://localhost:80", "API-FP6SWTW1NQG6NCX62R4JGBMLPBW", new FilePath("C:\\Users\\mopaczynski\\Source\\Repos\\Pipelines\\Pipelines.0.1.2.3.nupkg"),
+        new OctopusPushSettings{
+            ReplaceExisting = true
+        });
+    });
 
 Task("Default")
     .Does(() => {
