@@ -84,7 +84,7 @@ Task("Octopus-Package")
             Files = new[] {
                     new NuSpecContent {Target = "bin"}
                 },
-            BasePath = ".\\Pipelines\\JenkinsTests\\bin\\Release",
+            BasePath = "C:\\Users\\mopaczynski\\Source\\Repos\\Pipelines\\Pipelines\\JenkinsTests\\bin\\Release",
             OutputDirectory = "./"
         };
 
