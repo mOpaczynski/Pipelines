@@ -60,7 +60,7 @@ namespace CakeExtensions
 
         private static string GetRootPath()
         {
-            return new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
+            return new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.FullName;
         }
 
         private static string GetLastSegment(string path)
