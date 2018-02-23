@@ -21,20 +21,20 @@ Task("Build-Solution")
 
 Task("Migrate-Databases")
     .Does(() => {
-        MigrateDatabases(projectConfiguration, migrationConfiguration);
+        ////MigrateDatabases(projectConfiguration, migrationConfiguration);
     });
 
 Task("Rollback-Migrations")
     .Does(()=> {
-        MigrateDatabases(projectConfiguration, migrationConfiguration, 0);
+        ////MigrateDatabases(projectConfiguration, migrationConfiguration, 0);
     });
 
 Task("Migrate-Databases-And-Test-Seeds")
     .IsDependentOn("Migrate-Databases")
     .IsDependentOn("Rollback-Migrations")
     .Does(() => {
-        MigrateDatabases(projectConfiguration, migrationConfiguration);
-        MigrateDatabases(projectConfiguration, migrationConfiguration);
+        ////MigrateDatabases(projectConfiguration, migrationConfiguration);
+        ////MigrateDatabases(projectConfiguration, migrationConfiguration);
     });
 
 Task("Run-Unit-Tests")
@@ -45,7 +45,7 @@ Task("Run-Unit-Tests")
             Labels = NUnit3Labels.Before
         };
 
-        NUnit3(testAssemblies, settings);
+        ////NUnit3(testAssemblies, settings);
     });
 
 Task("Run-Api-Tests")
@@ -56,7 +56,7 @@ Task("Run-Api-Tests")
             Labels = NUnit3Labels.Before
         };
 
-        NUnit3(testAssemblies, settings);
+        ////NUnit3(testAssemblies, settings);
     });
 
 Task("Run-Ui-Tests")
@@ -67,7 +67,7 @@ Task("Run-Ui-Tests")
             Labels = NUnit3Labels.Before
         };
 
-        NUnit3(testAssemblies, settings);
+        ////NUnit3(testAssemblies, settings);
     });
 
 Task("Octopus-Package")
