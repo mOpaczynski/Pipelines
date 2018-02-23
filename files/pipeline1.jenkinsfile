@@ -38,7 +38,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        echo 'Deploying...'
+        powershell "$CAKE_EXE build.cake -target=Octopus-Package"
       }
     }
   }

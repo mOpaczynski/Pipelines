@@ -73,6 +73,22 @@ Task("Run-Ui-Tests")
 Task("Octopus-Package")
 .Does(() => {
         Information("Packing octopus");
+        var nuGetPackageSettings = new NuGetPackSettings{
+            Id = "Pipelines",
+            Vesrion = "0.1.2.3"
+            Title = "Title this",
+            Authors = new[] { "Some author" },
+            Description = "This is the description of a project",
+            Summary = "Summary",
+            ProjectUrl = new Uri("http://the-project-url.pl"),
+            Files = new[] {
+                    new NuSpecContent {Source = "JenkinsTests.dll", Target = "bin"}
+                },
+            BasePath = "./Pipelines/JenkinsTests/bin/Release",
+            OutputDirectory = "./nuget"
+        };
+
+        NuGetPack(nuGetPackageSettings);
 });
 
 Task("Default")
