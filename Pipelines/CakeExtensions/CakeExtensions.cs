@@ -16,8 +16,8 @@ namespace CakeExtensions
         public static void MigrateDatabases(this ICakeContext context, string projectConfiguration = "Release", string migrationConfiguration = "Configuration", int? targetMigration = null)
         {
             var solutionRootDirectory = GetRootPath();
-            var migrateExecFile = Directory.GetFiles(Invariant($"{solutionRootDirectory.FullName}"), "migrate.exe", SearchOption.AllDirectories).First();
-            var dataAccessDirectories = Directory.GetDirectories(solutionRootDirectory.FullName, "*.DataAccess", SearchOption.AllDirectories);
+            var migrateExecFile = Directory.GetFiles(Invariant($"{solutionRootDirectory}"), "migrate.exe", SearchOption.AllDirectories).First();
+            var dataAccessDirectories = Directory.GetDirectories(solutionRootDirectory, "*.DataAccess", SearchOption.AllDirectories);
 
             foreach (var dataAccessDirectory in dataAccessDirectories)
             {
@@ -58,9 +58,9 @@ namespace CakeExtensions
             }
         }
 
-        private static DirectoryInfo GetRootPath()
+        private static string GetRootPath()
         {
-            return new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent;
+            return new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
         }
 
         private static string GetLastSegment(string path)
