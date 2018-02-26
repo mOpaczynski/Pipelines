@@ -1,6 +1,7 @@
 pipeline {
   agent {
-    agent {
+    node {
+      label 'jenkins-master'
       customWorkspace '/master'
     }
   }
