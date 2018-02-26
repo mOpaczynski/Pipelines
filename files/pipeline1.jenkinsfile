@@ -1,5 +1,9 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      customWorkspace '/master'
+    }
+  }
   environment {
     CAKE_EXE = ".\\tools\\Cake.0.25.0\\cake.exe"
   }
