@@ -65,7 +65,7 @@ namespace CakeExtensions
         {
             var solutionRootDirectory = GetRootPath();
             var apiProjects = Directory.GetDirectories(solutionRootDirectory, "*.Api", SearchOption.AllDirectories);
-            var webProjects = Directory.GetDirectories(solutionRootDirectory, "*.Web", SearchOption.AllDirectories);
+            var webProjects = Directory.GetDirectories(solutionRootDirectory, "*.Web", SearchOption.AllDirectories).Where(x => !x.Contains(".dotnet"));
             var projectsToPack = new List<string>();
             List<NuGetPackSettings> nugetPackSettings = new List<NuGetPackSettings>();
 
