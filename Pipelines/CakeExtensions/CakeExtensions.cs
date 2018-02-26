@@ -116,6 +116,7 @@ namespace CakeExtensions
 
             foreach (var projectPack in projectPacks)
             {
+                context.Log.Information(projectPack);
                 octoPush.Packages.Add(new FilePath(projectPack));
             }
 
