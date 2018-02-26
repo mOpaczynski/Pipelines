@@ -85,7 +85,7 @@ Task("Octopus-Package")
                 Description = project.Description,
                 Summary = project.Summary,
                 ProjectUrl = project.ProjectUrl,
-                Files = new[] { new NuSpecContent { Source = project.FilesSource, Target = project.FilesTarget} }
+                Files = new[] { new NuSpecContent { Source = project.FilesSource, Target = project.FilesTarget } },
                 OutputDirectory = project.OutputDirectory
             };
 
