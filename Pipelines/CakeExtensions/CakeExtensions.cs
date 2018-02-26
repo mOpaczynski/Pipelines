@@ -87,7 +87,7 @@ namespace CakeExtensions
                     ProjectUrl = new Uri("http://the-project-url.pl"),
                     FilesSource = Invariant($"{project}/bin/{projectConfiguration}/*"),
                     FilesTarget = "content",
-                    OutputDirectory = Invariant($"{project}/{NugetPackFolderName}")
+                    OutputDirectory = Invariant($"{solutionRootDirectory}/{NugetPackFolderName}")
                 };
 
                 nugetPackSettings.Add(projectSettings);
