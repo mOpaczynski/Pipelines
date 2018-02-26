@@ -88,6 +88,8 @@ namespace CakeExtensions
                     OutputDirectory = Invariant($"{solutionRootDirectory}")
                 };
 
+                context.Log.Information(projectSettings.FilesSource);
+
                 nugetPackSettings.Add(projectSettings);
             }
 
