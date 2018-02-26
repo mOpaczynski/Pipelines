@@ -85,7 +85,7 @@ namespace CakeExtensions
                     Description = "Test",
                     Summary = "Summary",
                     ProjectUrl = new Uri("http://the-project-url.pl"),
-                    FilesSource = Invariant($"{project}/bin/{projectConfiguration}/*"),
+                    FilesSource = GetLastSegment(project).Contains("Api") ? Invariant($"{project}/bin/{projectConfiguration}/*") : Invariant($"{project}/bin/*"),
                     FilesTarget = "content",
                     OutputDirectory = Invariant($"{solutionRootDirectory}/{NugetPackFolderName}")
                 };
