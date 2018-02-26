@@ -1,6 +1,7 @@
 pipeline {
   agent {
     node {
+      label 'working-node'
       customWorkspace '/master'
     }
   }
