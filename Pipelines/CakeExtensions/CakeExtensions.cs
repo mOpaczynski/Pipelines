@@ -84,7 +84,7 @@ namespace CakeExtensions
                     {
                         new NuSpecContent
                         {
-                            Source = Invariant($"{apiProject}/bin/{projectConfiguration}"),
+                            Source = Invariant($"{apiProject}/bin/{projectConfiguration}/*"),
                             Target = "content"
                         }
                     },
