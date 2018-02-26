@@ -137,7 +137,7 @@ namespace CakeExtensions
 
         private static string GetProjectVersion()
         {
-            return "1.0.0.0";
+            return "1.0.1.232344";
         }
     }
 }
