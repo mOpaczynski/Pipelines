@@ -18,7 +18,9 @@ namespace CakeExtensions.Models
 
         public Uri ProjectUrl { get; set; }
 
-        public NuSpecContent Files { get; set; }
+        public string FilesSource { get; set; }
+
+        public string FilesTarget { get; set; }
 
         public string BasePath { get; set; }
 
