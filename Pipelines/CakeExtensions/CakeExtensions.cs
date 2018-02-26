@@ -83,7 +83,7 @@ namespace CakeExtensions
                     Description = "Test",
                     Summary = "Summary",
                     ProjectUrl = new Uri("http://the-project-url.pl"),
-                    FilesSource = new DirectoryInfo(Invariant($"{project}/bin/*")).FullName,
+                    FilesSource = new DirectoryInfo(Invariant($"{project}/bin")).FullName + "\\*",
                     FilesTarget = "content",
                     OutputDirectory = Invariant($"{solutionRootDirectory}")
                 };
