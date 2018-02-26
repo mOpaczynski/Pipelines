@@ -63,7 +63,7 @@ namespace CakeExtensions
         }
 
         [CakeMethodAlias]
-        public static List<NuGetPackSettings> GetNugetPackSettings(this ICakeContext context, string projectConfiguration = "Release")
+        public static List<NuGetPackSettings> SetProjectsToPack(this ICakeContext context, string projectConfiguration = "Release")
         {
             var solutionRootDirectory = GetRootPath();
             var apiProjects = Directory.GetDirectories(solutionRootDirectory, "*.Api", SearchOption.AllDirectories);

@@ -74,7 +74,7 @@ Task("Octopus-Package")
     .Does(() => {
         Information("Packing octopus");
 
-        var projects = GetNugetPackSettings(projectConfiguration);
+        var projects = SetProjectsToPack(projectConfiguration);
 
         foreach (var project in projects) {
             var nuGetPackSettings = new NuGetPackSettings {
