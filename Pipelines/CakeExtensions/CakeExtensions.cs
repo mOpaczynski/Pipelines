@@ -67,21 +67,26 @@ namespace CakeExtensions
         {
             var solutionRootDirectory = GetRootPath();
             var apiProjects = Directory.GetDirectories(solutionRootDirectory, "*.Api", SearchOption.AllDirectories);
+            var webProjects = Directory.GetDirectories(solutionRootDirectory, "*.Web", SearchOption.AllDirectories);
+            var projectsToPack = new List<string>();
+            projectsToPack.AddRange(apiProjects);
+            projectsToPack.AddRange(webProjects);
+
             List<NuGetPackSettings> nugetPackSettings = new List<NuGetPackSettings>();
 
-            foreach (var apiProject in apiProjects)
+            foreach (var project in projectsToPack)
             {
                 var projectSettings = new NuGetPackSettings
                 {
-                    Id = GetLastSegment(apiProject),
+                    Id = GetLastSegment(project),
                     Version = GetProjectVersion(),
                     Title = "Test",
                     Authors = new[] {"One", "Two", "Three"},
                     Description = "Test",
                     Summary = "Summary",
                     ProjectUrl = new Uri("http://the-project-url.pl"),
-                    Files = new NuSpecContent { Source = Invariant($"{apiProject}/bin/{projectConfiguration}/*"), Target = "content" },
-                    OutputDirectory = Invariant($"{apiProject}/{NugetPackFolderName}")
+                    Files = new NuSpecContent { Source = Invariant($"{project}/bin/{projectConfiguration}/*"), Target = "content" },
+                    OutputDirectory = Invariant($"{project}/{NugetPackFolderName}")
                 };
 
                 nugetPackSettings.Add(projectSettings);
