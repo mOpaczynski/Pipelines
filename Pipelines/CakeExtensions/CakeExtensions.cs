@@ -14,8 +14,6 @@ namespace CakeExtensions
 {
     public static class CakeExtensions
     {
-        private const string NugetPackFolderName = ".nuget";
-
         [CakeMethodAlias]
         public static void MigrateDatabases(this ICakeContext context, string projectConfiguration = "Release", string migrationConfiguration = "Configuration", int? targetMigration = null)
         {
@@ -87,7 +85,7 @@ namespace CakeExtensions
                     ProjectUrl = new Uri("http://the-project-url.pl"),
                     FilesSource = GetLastSegment(project).Contains("Api") ? Invariant($"{project}/bin/{projectConfiguration}/*") : Invariant($"{project}/bin/*"),
                     FilesTarget = "content",
-                    OutputDirectory = Invariant($"{solutionRootDirectory}/{NugetPackFolderName}")
+                    OutputDirectory = Invariant($"{solutionRootDirectory}")
                 };
 
                 nugetPackSettings.Add(projectSettings);
