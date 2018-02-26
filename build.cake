@@ -85,7 +85,7 @@ Task("Octopus-Package")
                 Description = project.Description,
                 Summary = project.Summary,
                 ProjectUrl = project.ProjectUrl,
-                Files = new[] { new NuSpecContent { Source = "C:\\Program Files (x86)\\Jenkins\\workspace\\master\\Pipelines\\WebStuff.Web\\bin\\*", Target = project.FilesTarget } },
+                Files = new[] { new NuSpecContent { Source = project.FilesSource, Target = project.FilesTarget } },
                 OutputDirectory = project.OutputDirectory
             };
 
