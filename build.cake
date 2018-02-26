@@ -73,22 +73,24 @@ Task("Run-Ui-Tests")
 Task("Octopus-Package")
     .Does(() => {
         Information("Packing octopus");
-        var nuGetPackageSettings = new NuGetPackSettings{
-            Id = "Pipelines",
-            Version = "0.1.2.3",
-            Title = "Title this",
-            Authors = new[] { "Some author" },
-            Description = "This is the description of a project",
-            Summary = "Summary",
-            ProjectUrl = new Uri("http://the-project-url.pl"),
-            Files = new[] {
-                    new NuSpecContent {Source = "C:\\Users\\mopaczynski\\Source\\Repos\\Pipelines\\Pipelines\\JenkinsTests\\bin\\Release\\*", Target = "content"}
-                },
-            BasePath = "C:\\Users\\mopaczynski\\Source\\Repos\\Pipelines\\Pipelines\\JenkinsTests\\bin\\Release",
-            OutputDirectory = "C:\\Users\\mopaczynski\\Source\\Repos\\Pipelines\\"
-        };
 
-        NuGetPack(nuGetPackageSettings);
+        var projects = GetNugetPackSettings(projectConfiguration);
+
+        foreach (var project in projects) {
+            var nuGetPackSettings = new NuGetPackSettings {
+                Id = project.Id,
+                Version = project.Version,
+                Title = project.Title,
+                Authors = project.Authors,
+                Description = project.Description,
+                Summary = project.Summary,
+                ProjectUrl = project.ProjectUrl,
+                Files = project.Files,
+                OutputDirectory = project.OutputDirectory
+            };
+
+            NuGetPack(nuGetPackageSettings);
+        }
 });
 
 Task("Octopus-Push")

@@ -6,15 +6,16 @@ using System.Linq;
 using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.Diagnostics;
-using Cake.NuGet;
 using CakeExtensions.Models;
-using NuGet.Configuration;
+
 using static System.FormattableString;
 
 namespace CakeExtensions
 {
     public static class CakeExtensions
     {
+        private const string NugetPackFolderName = ".nuget";
+
         [CakeMethodAlias]
         public static void MigrateDatabases(this ICakeContext context, string projectConfiguration = "Release", string migrationConfiguration = "Configuration", int? targetMigration = null)
         {
@@ -87,7 +88,7 @@ namespace CakeExtensions
                             Target = "content"
                         }
                     },
-                    OutputDirectory = Invariant($"{apiProject}/.nuget")
+                    OutputDirectory = Invariant($"{apiProject}/{NugetPackFolderName}")
                 };
 
                 nugetPackSettings.Add(projectSettings);
