@@ -61,7 +61,7 @@ namespace CakeExtensions
         }
 
         [CakeMethodAlias]
-        public static List<NuGetPackSettings> SetProjectsToPack(this ICakeContext context, string projectConfiguration = "Release")
+        public static List<NuGetPackSettings> SetProjectsToPack(this ICakeContext context)
         {
             var solutionRootDirectory = GetRootPath();
             var apiProjects = Directory.GetDirectories(solutionRootDirectory, "*.Api", SearchOption.AllDirectories);
@@ -83,7 +83,7 @@ namespace CakeExtensions
                     Description = "Test",
                     Summary = "Summary",
                     ProjectUrl = new Uri("http://the-project-url.pl"),
-                    FilesSource = GetLastSegment(project).Contains("Api") ? Invariant($"{project}/bin/{projectConfiguration}/*") : Invariant($"{project}/bin/*"),
+                    FilesSource = new DirectoryInfo(Invariant($"{project}/bin/*")).FullName,
                     FilesTarget = "content",
                     OutputDirectory = Invariant($"{solutionRootDirectory}")
                 };
