@@ -69,10 +69,10 @@ namespace CakeExtensions
             var apiProjects = Directory.GetDirectories(solutionRootDirectory, "*.Api", SearchOption.AllDirectories);
             var webProjects = Directory.GetDirectories(solutionRootDirectory, "*.Web", SearchOption.AllDirectories);
             var projectsToPack = new List<string>();
+            List<NuGetPackSettings> nugetPackSettings = new List<NuGetPackSettings>();
+
             projectsToPack.AddRange(apiProjects);
             projectsToPack.AddRange(webProjects);
-
-            List<NuGetPackSettings> nugetPackSettings = new List<NuGetPackSettings>();
 
             foreach (var project in projectsToPack)
             {
