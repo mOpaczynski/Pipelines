@@ -80,14 +80,7 @@ namespace CakeExtensions
                     Description = "Test",
                     Summary = "Summary",
                     ProjectUrl = new Uri("http://the-project-url.pl"),
-                    Files = new[]
-                    {
-                        new NuSpecContent
-                        {
-                            Source = Invariant($"{apiProject}/bin/{projectConfiguration}/*"),
-                            Target = "content"
-                        }
-                    },
+                    Files = new NuSpecContent { Source = Invariant($"{apiProject}/bin/{projectConfiguration}/*"), Target = "content" },
                     OutputDirectory = Invariant($"{apiProject}/{NugetPackFolderName}")
                 };
 
