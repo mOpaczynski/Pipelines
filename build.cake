@@ -91,7 +91,7 @@ Task("Octopus-Package")
 
             NuGetPack(nuGetPackSettings);
         }
-});
+    });
 
 Task("Octopus-Push")
     .IsDependentOn("Octopus-Package")
