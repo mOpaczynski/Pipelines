@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="CakeExtensions.cs" />
     <Compile Include="Models\NugetPackSettings.cs" />
+    <Compile Include="Models\OctoPush.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

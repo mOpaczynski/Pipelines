@@ -6,14 +6,20 @@ using System.Linq;
 using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.Diagnostics;
+using Cake.Core.IO;
 using CakeExtensions.Models;
 
 using static System.FormattableString;
+using Path = System.IO.Path;
 
 namespace CakeExtensions
 {
     public static class CakeExtensions
     {
+        private const string NugetPackOutputFolder = "packed-for-deploy";
+        private const string OctopusApiKey = "API-FP6SWTW1NQG6NCX62R4JGBMLPBW";
+        private const string OctopusServerUrl = "http://localhost:80";
+
         [CakeMethodAlias]
         public static void MigrateDatabases(this ICakeContext context, string projectConfiguration = "Release", string migrationConfiguration = "Configuration", int? targetMigration = null)
         {
@@ -85,7 +91,7 @@ namespace CakeExtensions
                     ProjectUrl = new Uri("http://the-project-url.pl"),
                     FilesSource = new DirectoryInfo(Invariant($"{project}/bin")).FullName + "\\*",
                     FilesTarget = "content",
-                    OutputDirectory = Invariant($"{solutionRootDirectory}")
+                    OutputDirectory = new DirectoryInfo(Invariant($"{solutionRootDirectory}/{NugetPackOutputFolder}")).FullName
                 };
 
                 context.Log.Information(projectSettings.FilesSource);
@@ -94,6 +100,26 @@ namespace CakeExtensions
             }
 
             return nugetPackSettings;
+        }
+
+        [CakeMethodAlias]
+        public static OctoPush SetOctoPush(this ICakeContext context)
+        {
+            var octoPush = new OctoPush
+            {
+                ApiKey = OctopusApiKey,
+                ServerUrl = OctopusServerUrl,
+                ReplaceExisting = true
+            };
+
+            var projectPacks = Directory.GetFiles(new DirectoryInfo(Invariant($"{GetRootPath()}/{NugetPackOutputFolder}")).FullName, "*.nupkg");
+
+            foreach (var projectPack in projectPacks)
+            {
+                octoPush.Packages.Add(new FilePath(projectPack));
+            }
+
+            return octoPush;
         }
 
         private static string GetRootPath()
