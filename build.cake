@@ -89,7 +89,7 @@ Task("Octopus-Package")
                 OutputDirectory = project.OutputDirectory
             };
 
-            NuGetPack(nuGetPackageSettings);
+            NuGetPack(nuGetPackSettings);
         }
 });
 
