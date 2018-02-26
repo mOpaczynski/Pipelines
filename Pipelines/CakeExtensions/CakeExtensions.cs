@@ -111,14 +111,14 @@ namespace CakeExtensions
             {
                 ApiKey = OctopusApiKey,
                 ServerUrl = OctopusServerUrl,
-                ReplaceExisting = true
+                ReplaceExisting = true,
+                Packages = new List<FilePath>()
             };
 
             var projectPacks = Directory.GetFiles(new DirectoryInfo(Invariant($"{GetRootPath()}/{NugetPackOutputFolder}")).FullName, "*.nupkg");
 
             foreach (var projectPack in projectPacks)
             {
-                context.Log.Information(projectPack);
                 octoPush.Packages.Add(new FilePath(projectPack));
             }
 
