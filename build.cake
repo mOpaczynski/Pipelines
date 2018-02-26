@@ -75,6 +75,7 @@ Task("Octopus-Package")
         Information("Packing octopus");
         var nuGetPackageSettings = new NuGetPackSettings{
             Id = "Pipelines",
+            Version = "0.1.2.3",
             Title = "Title this",
             Authors = new[] { "Some author" },
             Description = "This is the description of a project",
