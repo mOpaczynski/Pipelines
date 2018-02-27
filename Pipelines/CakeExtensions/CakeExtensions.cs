@@ -87,7 +87,7 @@ namespace CakeExtensions
                     Id = GetLastSegment(project),
                     Version = GetProjectVersion(),
                     Description = Invariant($"The {GetLastSegment(project)} deployment package, built on {DateTime.Now}."),
-                    Authors = new [] {"S.I.D. Team"},
+                    Authors = new [] {"Strange Issues Department"},
                     FilesSource = new DirectoryInfo(Invariant($"{project}/bin")).FullName + "\\*",
                     FilesTarget = "bin",
                     OutputDirectory = new DirectoryInfo(Invariant($"{solutionRootDirectory}/{NugetPackOutputFolder}")).FullName

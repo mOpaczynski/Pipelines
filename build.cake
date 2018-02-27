@@ -99,6 +99,20 @@ Task("Octopus-Push")
             octoPush.Packages,
             new OctopusPushSettings{ ReplaceExisting = octoPush.ReplaceExisting }
         );
+
+        OctoCreateRelease(
+            "Pipelines",
+            new CreateReleaseSettings {
+                Server = octoPush.ServerUrl,
+                ApiKey = octoPush.ApiKey
+            }
+        );
+    });
+
+Task("Octopus-Release")
+    .IsDependentOn("Octopus-Push")
+    .Does(() => {
+        
     });
 
 Task("Default")
