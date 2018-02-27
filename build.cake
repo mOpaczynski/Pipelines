@@ -113,7 +113,7 @@ Task("Octopus-Push")
             octoPush.ApiKey,
             "Pipelines",
             "Dev",
-            "",
+            "latest",
             new OctopusDeployReleaseDeploymentSettings()
         );
     });
