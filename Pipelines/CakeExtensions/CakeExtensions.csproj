@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CakeExtensions.cs" />
+    <Compile Include="Models\OctoReleaseSettings.cs" />
     <Compile Include="Models\PackageSettings.cs" />
     <Compile Include="Models\OctoPushSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
