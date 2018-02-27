@@ -78,11 +78,7 @@ Task("Octopus-Package")
             var nuGetPackSettings = new NuGetPackSettings {
                 Id = project.Id,
                 Version = project.Version,
-                Title = project.Title,
-                Authors = project.Authors,
                 Description = project.Description,
-                Summary = project.Summary,
-                ProjectUrl = project.ProjectUrl,
                 Files = new[] { new NuSpecContent { Source = project.FilesSource, Target = project.FilesTarget } },
                 OutputDirectory = project.OutputDirectory
             };

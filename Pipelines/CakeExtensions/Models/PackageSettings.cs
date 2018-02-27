@@ -2,7 +2,7 @@
 
 namespace CakeExtensions.Models
 {
-    public class NuGetPackSettings
+    public class PackageSettings
     {
         public string Id { get; set; }
 

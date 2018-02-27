@@ -3,7 +3,7 @@ using Cake.Core.IO;
 
 namespace CakeExtensions.Models
 {
-    public class OctoPush
+    public class OctoPushSettings
     {
         public string ApiKey { get; set; }
 

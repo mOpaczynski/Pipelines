@@ -67,14 +67,14 @@ namespace CakeExtensions
         }
 
         [CakeMethodAlias]
-        public static List<NuGetPackSettings> SetProjectsToPack(this ICakeContext context)
+        public static List<PackageSettings> SetProjectsToPack(this ICakeContext context)
         {
             var solutionRootDirectory = GetRootPath();
             var apiProjects = Directory.GetDirectories(solutionRootDirectory, "*.Api", SearchOption.AllDirectories);
             var webProjects = Directory.GetDirectories(solutionRootDirectory, "*.Web", SearchOption.AllDirectories).Where(x => !x.Contains(".dotnet"));
             var projectsToPack = new List<string>();
             var outPutFolder = new DirectoryInfo(Invariant($"{solutionRootDirectory}/{NugetPackOutputFolder}")).FullName;
-            List<NuGetPackSettings> nugetPackSettings = new List<NuGetPackSettings>();
+            List<PackageSettings> nugetPackSettings = new List<PackageSettings>();
 
             Directory.CreateDirectory(outPutFolder);
             projectsToPack.AddRange(apiProjects);
@@ -82,17 +82,13 @@ namespace CakeExtensions
 
             foreach (var project in projectsToPack)
             {
-                var projectSettings = new NuGetPackSettings
+                var projectSettings = new PackageSettings
                 {
                     Id = GetLastSegment(project),
                     Version = GetProjectVersion(),
-                    Title = "Test",
-                    Authors = new[] {"One", "Two", "Three"},
-                    Description = "Test",
-                    Summary = "Summary",
-                    ProjectUrl = new Uri("http://the-project-url.pl"),
+                    Description = Invariant($"The {GetLastSegment(project)} deployment package, built on {DateTime.Now}."),
                     FilesSource = new DirectoryInfo(Invariant($"{project}/bin")).FullName + "\\*",
-                    FilesTarget = "content",
+                    FilesTarget = "bin",
                     OutputDirectory = new DirectoryInfo(Invariant($"{solutionRootDirectory}/{NugetPackOutputFolder}")).FullName
                 };
 
@@ -105,9 +101,9 @@ namespace CakeExtensions
         }
 
         [CakeMethodAlias]
-        public static OctoPush SetOctoPush(this ICakeContext context)
+        public static OctoPushSettings SetOctoPush(this ICakeContext context)
         {
-            var octoPush = new OctoPush
+            var octoPush = new OctoPushSettings
             {
                 ApiKey = OctopusApiKey,
                 ServerUrl = OctopusServerUrl,
@@ -137,7 +133,7 @@ namespace CakeExtensions
 
         private static string GetProjectVersion()
         {
-            return "1.0.1.232344";
+            return "1.0.1.3";
         }
     }
 }
