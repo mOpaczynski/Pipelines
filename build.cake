@@ -108,9 +108,9 @@ Task("Octopus-Create-Release")
     .Does(() => {
         var octoRelease = GetOctoReleaseSettings();
 
-        octoRelease(
+        OctoRelease(
             octoRelease.OctopusProjectName,
-            new CreatereleaseSettings {
+            new CreateReleaseSettings {
                 Server = octoRelease.ServerUrl,
                 ApiKey = octoRelease.ApiKey
             }
@@ -128,7 +128,7 @@ Task("Octopus-Deploy-Release")
             octoDeploy.OctopusProjectName,
             octoDeploy.TargetEnvironment,
             octoDeploy.ReleaseNumber,
-            new OctopusDeplotReleaseSettings()
+            new OctopusDeployReleaseSettings()
         );
     });
 
