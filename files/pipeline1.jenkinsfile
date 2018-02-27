@@ -43,7 +43,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        powershell "$CAKE_EXE build.cake -target=Octopus-Push"
+        powershell "$CAKE_EXE build.cake -target=Octopus-Deploy-Release"
       }
     }
   }

@@ -19,6 +19,7 @@ namespace CakeExtensions
         private const string NugetPackOutputFolder = "packed-for-deploy";
         private const string OctopusApiKey = "API-FP6SWTW1NQG6NCX62R4JGBMLPBW";
         private const string OctopusServerUrl = "http://localhost:80";
+        private const string OctopusProjectName = "Pipelines";
 
         [CakeMethodAlias]
         public static void MigrateDatabases(this ICakeContext context, string projectConfiguration = "Release", string migrationConfiguration = "Configuration", int? targetMigration = null)
@@ -102,7 +103,7 @@ namespace CakeExtensions
         }
 
         [CakeMethodAlias]
-        public static OctoPushSettings SetOctoPush(this ICakeContext context)
+        public static OctoPushSettings GetOctoPushSettings(this ICakeContext context)
         {
             var octoPush = new OctoPushSettings
             {
@@ -120,6 +121,30 @@ namespace CakeExtensions
             }
 
             return octoPush;
+        }
+
+        [CakeMethodAlias]
+        public static OctoCreateReleaseSettings GetOctoReleaseSettings(this ICakeContext context)
+        {
+            return new OctoCreateReleaseSettings
+            {
+                ApiKey = OctopusApiKey,
+                ServerUrl = OctopusServerUrl,
+                OctopusProjectName = OctopusProjectName
+            };
+        }
+
+        [CakeMethodAlias]
+        public static OctoDeployReleaseSettings GetOctoDeployReleaseSettings(this ICakeContext context)
+        {
+            return new OctoDeployReleaseSettings
+            {
+                ApiKey = OctopusApiKey,
+                ServerUrl = OctopusServerUrl,
+                OctopusProjectName = OctopusProjectName,
+                TargetEnvironment = "Dev",
+                ReleaseNumber = "latest"
+            };
         }
 
         private static string GetRootPath()

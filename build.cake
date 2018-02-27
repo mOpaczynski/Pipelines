@@ -88,40 +88,48 @@ Task("Octopus-Package")
         }
     });
 
-Task("Octopus-Push")
+Task("Octopus-Push-Packages")
     .IsDependentOn("Octopus-Package")
     .Does(() => {
-        var octoPush = SetOctoPush();
+        var octoPush = GetOctoPushSettings();
         
         OctoPush(
             octoPush.ServerUrl,
             octoPush.ApiKey,
             octoPush.Packages,
-            new OctopusPushSettings{ ReplaceExisting = octoPush.ReplaceExisting }
-        );
-
-        OctoCreateRelease(
-            "Pipelines",
-            new CreateReleaseSettings {
-                Server = octoPush.ServerUrl,
-                ApiKey = octoPush.ApiKey
+            new OctopusPushSettings { 
+                ReplaceExisting = octoPush.ReplaceExisting 
             }
-        );
-
-        OctoDeployRelease(
-            octoPush.ServerUrl,
-            octoPush.ApiKey,
-            "Pipelines",
-            "Dev",
-            "latest",
-            new OctopusDeployReleaseDeploymentSettings()
         );
     });
 
-Task("Octopus-Release")
-    .IsDependentOn("Octopus-Push")
+Task("Octopus-Create-Release")
+    .IsDependentOn("Octopus-Push-Packages")
     .Does(() => {
-        
+        var octoRelease = GetOctoReleaseSettings();
+
+        octoRelease(
+            octoRelease.OctopusProjectName,
+            new CreatereleaseSettings {
+                Server = octoRelease.ServerUrl,
+                ApiKey = octoRelease.ApiKey
+            }
+        );
+    });
+
+Task("Octopus-Deploy-Release")
+    .IsDependentOn("Octopus-Create-Release")
+    .Does(() => {
+        var octoDeploy = GetOctoDeployReleaseSettings();
+
+        OctoDeployRelease(
+            octoDeploy.ServerUrl,
+            octoDeploy.ApiKey,
+            octoDeploy.OctopusProjectName,
+            octoDeploy.TargetEnvironment,
+            octoDeploy.ReleaseNumber,
+            new OctopusDeplotReleaseSettings()
+        );
     });
 
 Task("Default")
