@@ -94,7 +94,7 @@ Task("Octopus-Push")
         var octoPush = SetOctoPush();
         
         OctoPush(
-            octoPush.ServerUrl, 
+            octoPush.ServerUrl,
             octoPush.ApiKey,
             octoPush.Packages,
             new OctopusPushSettings{ ReplaceExisting = octoPush.ReplaceExisting }
@@ -106,6 +106,15 @@ Task("Octopus-Push")
                 Server = octoPush.ServerUrl,
                 ApiKey = octoPush.ApiKey
             }
+        );
+
+        OctoDeployRelease(
+            octoPush.ServerUrl,
+            octoPush.ApiKey,
+            "Pipelines",
+            "Dev",
+            "",
+            new OctopusDeployReleaseDeploymentSettings()
         );
     });
 
