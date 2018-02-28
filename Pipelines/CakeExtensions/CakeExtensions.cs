@@ -90,7 +90,7 @@ namespace CakeExtensions
                     Description = Invariant($"The {GetLastSegment(project)} deployment package, built on {DateTime.Now}."),
                     Author = "Strange Issues Department",
                     FilesSource = new DirectoryInfo(Invariant($"{project}/bin")).FullName,
-                    OutputDirectory = new DirectoryPath(new DirectoryInfo(Invariant($"{solutionRootDirectory}/{NugetPackOutputFolder}")).FullName),
+                    OutputDirectory = new DirectoryInfo(Invariant($"{solutionRootDirectory}/{NugetPackOutputFolder}")).FullName,
                     Overwrite = true
                 };
 
