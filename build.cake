@@ -76,7 +76,6 @@ Task("Octopus-Package")
 
         foreach (var project in projects) {
             var packageSettings = new OctopusPackSettings {
-                Id = project.Id,
                 Version = project.Version,
                 Description = project.Description,
                 BasePath = project.FilesSource,
@@ -85,7 +84,7 @@ Task("Octopus-Package")
                 Overwrite = project.Overwrite
             };
 
-            OctoPack(packageSettings);
+            OctoPack(project.Id, packageSettings);
         }
     });
 

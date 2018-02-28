@@ -75,7 +75,7 @@ namespace CakeExtensions
             var webProjects = Directory.GetDirectories(solutionRootDirectory, "*.Web", SearchOption.AllDirectories).Where(x => !x.Contains(".dotnet"));
             var projectsToPack = new List<string>();
             var outPutFolder = new DirectoryInfo(Invariant($"{solutionRootDirectory}/{NugetPackOutputFolder}")).FullName;
-            List<PackageSettings> nugetPackSettings = new List<PackageSettings>();
+            List<PackageSettings> packageSettings = new List<PackageSettings>();
 
             Directory.CreateDirectory(outPutFolder);
             projectsToPack.AddRange(apiProjects);
@@ -94,10 +94,10 @@ namespace CakeExtensions
                     Overwrite = true
                 };
 
-                nugetPackSettings.Add(projectSettings);
+                packageSettings.Add(projectSettings);
             }
 
-            return nugetPackSettings;
+            return packageSettings;
         }
 
         [CakeMethodAlias]
