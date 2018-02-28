@@ -1,4 +1,5 @@
 ﻿using System;
+using Cake.Core.IO;
 
 namespace CakeExtensions.Models
 {
@@ -10,7 +11,7 @@ namespace CakeExtensions.Models
 
         public string Title { get; set; }
 
-        public string[] Authors { get; set; }
+        public string Author { get; set; }
 
         public string Description { get; set; }
 
@@ -24,6 +25,8 @@ namespace CakeExtensions.Models
 
         public string BasePath { get; set; }
 
-        public string OutputDirectory { get; set; }
+        public DirectoryPath OutputDirectory { get; set; }
+
+        public bool Overwrite { get; set; }
     }
 }

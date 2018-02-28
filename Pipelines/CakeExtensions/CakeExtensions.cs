@@ -88,13 +88,11 @@ namespace CakeExtensions
                     Id = GetLastSegment(project),
                     Version = GetProjectVersion(),
                     Description = Invariant($"The {GetLastSegment(project)} deployment package, built on {DateTime.Now}."),
-                    Authors = new [] {"Strange Issues Department"},
+                    Author = "Strange Issues Department",
                     FilesSource = new DirectoryInfo(Invariant($"{project}/bin")).FullName + "\\*",
-                    FilesTarget = "bin",
-                    OutputDirectory = new DirectoryInfo(Invariant($"{solutionRootDirectory}/{NugetPackOutputFolder}")).FullName
+                    OutputDirectory = new DirectoryPath(new DirectoryInfo(Invariant($"{solutionRootDirectory}/{NugetPackOutputFolder}")).FullName),
+                    Overwrite = true
                 };
-
-                context.Log.Information(projectSettings.FilesSource);
 
                 nugetPackSettings.Add(projectSettings);
             }
@@ -159,7 +157,7 @@ namespace CakeExtensions
 
         private static string GetProjectVersion()
         {
-            return "1.0.2.5";
+            return "1.0.2.6";
         }
     }
 }

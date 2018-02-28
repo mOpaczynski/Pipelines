@@ -75,16 +75,17 @@ Task("Octopus-Package")
         var projects = SetProjectsToPack();
 
         foreach (var project in projects) {
-            var nuGetPackSettings = new NuGetPackSettings {
+            var packageSettings = new OctopusPackSettings {
                 Id = project.Id,
                 Version = project.Version,
                 Description = project.Description,
-                Authors = project.Authors,
-                Files = new[] { new NuSpecContent { Source = project.FilesSource, Target = project.FilesTarget } },
-                OutputDirectory = project.OutputDirectory
+                BasePath = project.FilesSource,
+                Author = project.Author,
+                OutFolder = project.OutputDirectory,
+                Overwrite = project.Overwrite
             };
 
-            NuGetPack(nuGetPackSettings);
+            OctoPack(packageSettings);
         }
     });
 
