@@ -523,12 +523,6 @@
             The application root path.
             </returns>
         </member>
-        <member name="M:Cake.Core.CakeEnvironment.GetTargetFramework">
-            <summary>
-            Gets the target .Net framework version that the current AppDomain is targeting.
-            </summary>
-            <returns>The target framework.</returns>
-        </member>
         <member name="T:Cake.Core.CakeException">
             <summary>
             Represent errors that occur during script execution.
@@ -706,10 +700,16 @@
             Represents the runtime that Cake is running in.
             </summary>
         </member>
-        <member name="P:Cake.Core.CakeRuntime.TargetFramework">
+        <member name="P:Cake.Core.CakeRuntime.BuiltFramework">
             <summary>
-            Gets the target .NET framework version that the current AppDomain is targeting.
+            Gets the build-time .NET framework version that is being used.
             </summary>
+        </member>
+        <member name="P:Cake.Core.CakeRuntime.Runtime">
+            <summary>
+            Gets the current executing .NET Runtime.
+            </summary>
+            <returns>The target framework.</returns>
         </member>
         <member name="P:Cake.Core.CakeRuntime.CakeVersion">
             <summary>
@@ -2681,12 +2681,6 @@
             </summary>
             <returns>The application root path.</returns>
         </member>
-        <member name="M:Cake.Core.ICakeEnvironment.GetTargetFramework">
-            <summary>
-            Gets the target .Net framework version that the current AppDomain is targeting.
-            </summary>
-            <returns>The target framework.</returns>
-        </member>
         <member name="T:Cake.Core.ICakePlatform">
             <summary>
             Represents the platform that Cake is running on.
@@ -2722,9 +2716,14 @@
             Represents the runtime that Cake is running in.
             </summary>
         </member>
-        <member name="P:Cake.Core.ICakeRuntime.TargetFramework">
+        <member name="P:Cake.Core.ICakeRuntime.BuiltFramework">
             <summary>
-            Gets the target .NET framework version that the current AppDomain is targeting.
+            Gets the build-time .NET framework version that is being used.
+            </summary>
+        </member>
+        <member name="P:Cake.Core.ICakeRuntime.Runtime">
+            <summary>
+            Gets the current executing .NET Runtime.
             </summary>
             <returns>The target framework.</returns>
         </member>
@@ -4437,6 +4436,21 @@
         <member name="F:Cake.Core.PlatformFamily.OSX">
             <summary>
             Represents the OSX platform family.
+            </summary>
+        </member>
+        <member name="T:Cake.Core.Polyfill.Runtime">
+            <summary>
+            The current Runtime Cake is executing on.
+            </summary>
+        </member>
+        <member name="F:Cake.Core.Polyfill.Runtime.Clr">
+            <summary>
+            Full Framework or Mono.
+            </summary>
+        </member>
+        <member name="F:Cake.Core.Polyfill.Runtime.CoreClr">
+            <summary>
+            .NET Core 2.
             </summary>
         </member>
         <member name="T:Cake.Core.NamespaceDoc">
