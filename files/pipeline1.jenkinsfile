@@ -6,7 +6,7 @@ pipeline {
     }
   }
   environment {
-    CAKE_EXE = ".\\tools\\Cake.0.25.0\\cake.exe"
+    CAKE_EXE = ".\\tools\\Cake.0.26.0\\cake.exe"
   }
   options {
     disableConcurrentBuilds()
